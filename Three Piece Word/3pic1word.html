@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Three Piece Word</title>
+
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,700,800,900&display=swap" rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous">
+    </script>
+
+<!--Timer part of the activity-->
+<script>
+    function getTimeRemaining(endtime) {
+        var t = Date.parse(endtime) - Date.parse(new Date());
+        var seconds = Math.floor((t / 1000) % 60);
+        var minutes = Math.floor((t / 1000 / 60) % 60);
+        var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+        var days = Math.floor(t / (1000 * 60 * 60 * 24));
+        return {
+            'total': t,
+            'days': days,
+            'hours': hours,
+            'minutes': minutes,
+            'seconds': seconds
+        };
+    }
+
+    function initializeClock(id, endtime) {
+    var clock = document.getElementById(id);
+    var minutesSpan = clock.querySelector('.minutes');
+    var secondsSpan = clock.querySelector('.seconds');
+
+    function updateClock() {
+        var t = getTimeRemaining(endtime);
+
+        minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+        secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
+        if($('.minutes').text() == '00' && $('.seconds').text() == '00')
+        {
+          document.getElementById("c1").innerHTML = "";
+        }
+
+        if (t.total <= 0) {
+        clearInterval(timeinterval);
+        }
+    }
+
+    updateClock();
+    var timeinterval = setInterval(updateClock, 1000);
+    }
+
+    var deadline = new Date(Date.parse(new Date()) + 20 * 1000);
+    initializeClock('clockdiv', deadline);
+</script>
+
+
+
+<!--Styling of the elements-->
+  <style type="text/css">
+    body{
+      background-color: #FFF5FD;
+       margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    font-family: 'Nunito';
+    height: 100%;
+    }
+
+  .button {
+  background-color: #4CAF50; 
+  border: none;
+  color: white;
+  padding: 1px 10px;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.buttons {
+  background-color: #4CAF50; 
+  border: none;
+  color: white;
+  padding: 1px 1px;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button1 {
+  background-color: #f74d67; 
+  color: black; 
+}
+
+.button1:hover {
+  background-color: #f74d67;
+  color: white;
+}
+
+.button1:active {
+  background-color: #5562eb;
+  color: white;
+}
+
+input[type=text], select {
+  font-size: 13px;
+  text-align: center;
+  width: 30%;
+  padding: 5px 5px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+
+.button2 {
+  background-color: #f0ed7d; 
+  color: black; 
+}
+
+.button2:hover {
+  background-color: #f0ed7d;
+  color: black;
+}
+
+.button2:active {
+  background-color: #5562eb;
+  /*color: white;*/
+}
+
+.panel-back
+{
+  background-color: black;
+  color: white;
+}
+
+#particles-js canvas {
+    display: block;
+    /* vertical-align: bottom; */
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+    -webkit-transition: opacity .8s ease, -webkit-transform 1.4s ease;
+    transition: opacity .8s ease, transform 1.4s ease
+}
+
+#particles-js
+{
+  height: 150%;
+  width: 100%;
+  background: #FFF5FD;
+  opacity: 0.7;
+  position: absolute;
+  z-index: -1;
+}
+
+/*Navigation bar for the score*/
+nav {
+    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+
+.score-box {
+    text-align: right;
+    font-family: 'Cabin Sketch';
+    font-weight: bolder;
+    font-size: 40px;
+    letter-spacing: 0.5rem;
+    padding-top: 2rem;
+}
+
+/*******/
+
+/**********Clock*********/
+#clockdiv {
+    vertical-align: middle;
+    margin-left: 25px;
+    font-family: sans-serif;
+    color: #fff;
+    display: inline-block;
+    font-weight: 100;
+    text-align: center;
+    font-size: 30px;
+}
+
+#clockdiv>div {
+    padding: 10px;
+    border-radius: 3px;
+    background: #000;
+    display: inline-block;
+}
+
+#clockdiv div>span {
+    padding: 15px;
+    border-radius: 3px;
+    background: #000;
+    display: inline-block;
+}
+
+.smalltext {
+    padding-top: 5px;
+    font-size: 16px;
+}
+/********/
+
+/*Shadow effects for the buttons*/
+.option {
+    margin: 0 auto;
+    border-radius: 10px;
+    /*background-color: rgb(233, 233, 233);*/
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    -webkit-transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+}
+
+.option:hover {
+    -webkit-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.option1 {
+    margin: 0 auto;
+    border-radius: 10px;
+    background-color: rgb(233, 233, 233);
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    -webkit-transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+}
+
+.option1:hover {
+    -webkit-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+/************/
+</style>
+  <script type="text/javascript">
+    var score=0;
+
+    //this function takes 8 values from the user which is entered in the text box
+    function b(id)
+    {
+      if(document.getElementById("b1").value=="")
+      {
+        document.getElementById("b1").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("b2").value=="")
+      {
+        document.getElementById("b2").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("b3").value=="")
+      {
+        document.getElementById("b3").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("b4").value=="")
+      {
+        document.getElementById("b4").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("b5").value=="")
+      {
+        document.getElementById("b5").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("b6").value=="")
+      {
+        document.getElementById("b6").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("b7").value=="")
+      {
+        document.getElementById("b7").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("b8").value=="")
+      {
+        document.getElementById("b8").value = document.getElementById(id).value;
+      }
+    }
+
+    //this function takes 4 values from the user which he entered in the text box
+    function g(id)
+    {
+      if(document.getElementById("g1").value=="")
+      {
+        document.getElementById("g1").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("g2").value=="")
+      {
+        document.getElementById("g2").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("g3").value=="")
+      {
+        document.getElementById("g3").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("g4").value=="")
+      {
+        document.getElementById("g4").value = document.getElementById(id).value;
+      }
+    }
+
+    //this function takes 9 values from the user which he entered in the text box
+    function gr(id)
+    {
+      if(document.getElementById("gr1").value=="")
+      {
+        document.getElementById("gr1").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("gr2").value=="")
+      {
+        document.getElementById("gr2").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("gr3").value=="")
+      {
+        document.getElementById("gr3").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("gr4").value=="")
+      {
+        document.getElementById("gr4").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("gr5").value=="")
+      {
+        document.getElementById("gr5").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("gr6").value=="")
+      {
+        document.getElementById("gr6").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("gr7").value=="")
+      {
+        document.getElementById("gr7").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("gr8").value=="")
+      {
+        document.getElementById("gr8").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("gr9").value=="")
+      {
+        document.getElementById("gr9").value = document.getElementById(id).value;
+      }
+    }
+
+    //this function takes 8 values from the user which he entered in the text box
+    function t(id)
+    {
+      if(document.getElementById("t1").value=="")
+      {
+        document.getElementById("t1").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("t2").value=="")
+      {
+        document.getElementById("t2").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("t3").value=="")
+      {
+        document.getElementById("t3").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("t4").value=="")
+      {
+        document.getElementById("t4").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("t5").value=="")
+      {
+        document.getElementById("t5").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("t6").value=="")
+      {
+        document.getElementById("t6").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("t7").value=="")
+      {
+        document.getElementById("t7").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("t8").value=="")
+      {
+        document.getElementById("t8").value = document.getElementById(id).value;
+      }
+    }
+
+    //this function takes 12 values from the user which he entered in the text box
+    function a(id)
+    {
+      if(document.getElementById("a1").value=="")
+      {
+        document.getElementById("a1").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("a2").value=="")
+      {
+        document.getElementById("a2").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("a3").value=="")
+      {
+        document.getElementById("a3").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("a4").value=="")
+      {
+        document.getElementById("a4").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("a5").value=="")
+      {
+        document.getElementById("a5").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("a6").value=="")
+      {
+        document.getElementById("a6").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("a7").value=="")
+      {
+        document.getElementById("a7").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("a8").value=="")
+      {
+        document.getElementById("a8").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("a9").value=="")
+      {
+        document.getElementById("a9").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("a10").value=="")
+      {
+        document.getElementById("a10").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("a11").value=="")
+      {
+        document.getElementById("a11").value = document.getElementById(id).value;
+      }
+      else if(document.getElementById("a12").value=="")
+      {
+        document.getElementById("a12").value = document.getElementById(id).value;
+      }
+    }
+    function ans1()
+    {
+      document.getElementById("button1").disabled = true;
+      document.getElementById("greet").innerHTML = "BLESSING"; //on clicking show answer button, blessing is displayed
+    }
+
+    //checking the correct values in each text boxes
+    function check()
+    {
+      if(document.getElementById("b1").value == "B" && document.getElementById("b2").value == "L" && document.getElementById("b3").value == "E" && document.getElementById("b4").value == "S" && document.getElementById("b5").value == "S" && document.getElementById("b6").value == "I" && document.getElementById("b7").value == "N" && document.getElementById("b8").value == "G")
+      {
+        score++; //if answer is correct, score is incremented by 1
+        document.getElementById("scoring").innerHTML = "Your Score is " + score;
+        // Wrap every letter in a span
+        document.getElementById("button1").disabled = true;
+        document.getElementById("greet").innerHTML = "Correct";
+
+
+        
+        if(score == 5)
+    {
+      // Wrap every letter in a span
+      document.getElementById("congrats").innerHTML = "Congratulations You solved all three piece words"; //When all the words are solved, greeting is displayed
+      document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+
+          
+        document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+              document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+              document.getElementById("coins").hidden = false;
+              document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+    }
+      }
+      else
+      {
+        //if the word is solved incorrectly
+        var str = "<h3 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! Its incorrect. Try again!</h3>";
+        var res = str.fontcolor("red");
+        document.getElementById("greet").innerHTML = res;
+      }
+    }
+    function ans2()
+    {
+      document.getElementById("button2").disabled = true;
+      document.getElementById("greet2").innerHTML = "GIFT"; //on clicking show answer button, gift is displayed
+    }
+
+    //checking the correct values in each text boxes
+    function check2()
+    {
+      if(document.getElementById("g1").value == "G" && document.getElementById("g2").value == "I" && document.getElementById("g3").value == "F" && document.getElementById("g4").value == "T")
+      {
+        score++; //if answer is correct, score is incremented by 1
+        document.getElementById("scoring").innerHTML = "Your Score is " + score;
+        // Wrap every letter in a span
+        document.getElementById("greet2").innerHTML = "Correct";
+
+        
+        document.getElementById("button2").disabled = true;
+        if(score == 5)
+    {
+      // Wrap every letter in a span
+      document.getElementById("congrats").innerHTML = "Congratulations You solved all three piece words"; //When all the words are solved, greeting is displayed
+      document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+
+
+        document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+              document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+              document.getElementById("coins").hidden = false;
+              document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+    }
+      }
+      else
+      {
+        //if the word is solved incorrectly
+        var str = "<h3 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! Its incorrect. Try again!</h3>";
+        var res = str.fontcolor("red");
+        document.getElementById("greet2").innerHTML = res;
+      }
+    }
+    function ans3()
+    {
+      document.getElementById("button3").disabled = true;
+      document.getElementById("greet3").innerHTML = "GRATITUDE"; //on clicking show answer button, gratitude is displayed
+    }
+
+    //checking the correct values in each text boxes
+    function check3()
+    {
+      if(document.getElementById("gr1").value == "G" && document.getElementById("gr2").value == "R" && document.getElementById("gr3").value == "A" && document.getElementById("gr4").value == "T" && document.getElementById("gr5").value == "I" && document.getElementById("gr6").value == "T" && document.getElementById("gr7").value == "U" && document.getElementById("gr8").value == "D" && document.getElementById("gr9").value == "E")
+      {
+        score++; //if answer is correct, score is incremented by 1
+        document.getElementById("scoring").innerHTML = "Your Score is " + score;
+        // Wrap every letter in a span
+        document.getElementById("greet3").innerHTML = "Correct";
+
+        document.getElementById("button3").disabled = true;
+        if(score == 5)
+    {
+      // Wrap every letter in a span
+      document.getElementById("congrats").innerHTML = "Congratulations You solved all three piece words"; //When all the words are solved, greeting is displayed
+      document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+
+        document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+              document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+              document.getElementById("coins").hidden = false;
+              document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+    }
+      }
+      else
+      {
+        //if the word is solved incorrectly
+        var str = "<h3 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! Its incorrect. Try again!</h3>";
+        var res = str.fontcolor("red");
+        document.getElementById("greet3").innerHTML = res;
+      }
+    }
+    function ans4()
+    {
+      document.getElementById("button4").disabled = true;
+      document.getElementById("greet4").innerHTML = "THANKYOU"; //on clicking show answer button, thankyou is displayed
+    }
+
+    //checking the correct values in each text boxes
+    function check4()
+    {
+      if(document.getElementById("t1").value == "T" && document.getElementById("t2").value == "H" && document.getElementById("t3").value == "A" && document.getElementById("t4").value == "N" && document.getElementById("t5").value == "K" && document.getElementById("t6").value == "Y" && document.getElementById("t7").value == "O" && document.getElementById("t8").value == "U")
+      {
+        score++; //if answer is correct, score is incremented by 1
+        document.getElementById("scoring").innerHTML = "Your Score is " + score;
+        // Wrap every letter in a span
+        document.getElementById("greet4").innerHTML = "Correct";
+
+        document.getElementById("button4").disabled = true;
+        if(score == 5)
+    {
+      // Wrap every letter in a span
+      document.getElementById("congrats").innerHTML = "Congratulations You solved all three piece words"; //When all the words are solved, greeting is displayed
+      document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+
+        document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+              document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+              document.getElementById("coins").hidden = false;
+              document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+    }
+      }
+      else
+      {
+        //if the word is solved incorrectly
+        var str = "<h3 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! Its incorrect. Try again!</h3>";
+        var res = str.fontcolor("red");
+        document.getElementById("greet4").innerHTML = res;
+      }
+    }
+    function ans5()
+    {
+      document.getElementById("button5").disabled = true;
+      document.getElementById("greet5").innerHTML = "APPRECIATION"; //on clicking show answer button, appreciation is displayed
+    }
+
+    //checking the correct values in each text boxes
+    function check5()
+    {
+      if(document.getElementById("a1").value == "A" && document.getElementById("a2").value == "P" && document.getElementById("a3").value == "P" && document.getElementById("a4").value == "R" && document.getElementById("a5").value == "E" && document.getElementById("a6").value == "C" && document.getElementById("a7").value == "I" && document.getElementById("a8").value == "A" && document.getElementById("a9").value == "T" && document.getElementById("a10").value == "I" && document.getElementById("a11").value == "O" && document.getElementById("a12").value == "N")
+      {
+        score++; //if answer is correct, score is incremented by 1
+        document.getElementById("scoring").innerHTML = "Your Score is " + score;
+        // Wrap every letter in a span
+        document.getElementById("greet5").innerHTML = "Correct";
+
+        document.getElementById("button5").disabled = true;
+        document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+              document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+              document.getElementById("coins").hidden = false;
+              document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+        if(score == 5)
+    {
+      // Wrap every letter in a span
+      document.getElementById("congrats").innerHTML = "Congratulations You solved all three piece words"; //When all the words are solved, greeting is displayed
+      document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+
+           
+        document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+              document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+              document.getElementById("coins").hidden = false;
+              document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+    }
+      }
+      else
+      {
+        //if the word is solved incorrectly
+        var str = "<h3 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! Its incorrect. Try again!</h3>";
+        var res = str.fontcolor("red");
+        document.getElementById("greet5").innerHTML = res;
+      }
+    }
+  </script>
+  <script type="text/javascript">
+    //next function to move on to the next question
+    function next1()
+    {
+      //displays the corresponding images on that page and rest all are hidden
+      document.getElementById("img4").hidden = true;
+      document.getElementById("img5").hidden = true;
+      document.getElementById("img6").hidden = true;
+      document.getElementById("img7").hidden = true;
+      document.getElementById("img8").hidden = true;
+      document.getElementById("img9").hidden = true;
+      document.getElementById("img10").hidden = true;
+      document.getElementById("img11").hidden = true;
+      document.getElementById("img12").hidden = true;
+      document.getElementById("img13").hidden = true;
+      document.getElementById("img14").hidden = true;
+      document.getElementById("img15").hidden = true;
+
+      //displaying the three images on that page
+      document.getElementById("img1").hidden = false;
+
+      document.getElementById("img1").src = 'blessing.jpg';
+
+      document.getElementById("img2").hidden = false;
+      document.getElementById("img2").src = 'blessing2.jpg';
+
+      document.getElementById("img3").hidden = false;
+      document.getElementById("img3").src = 'blessing.jpeg';
+
+      //arranging the three images, adding 8 text boxes, 10 random alphabets, submit button, next button and show answer button
+      var lines = "<div id = 'c1' class= 'container' style = 'text-align : center; font-family: Nunito;'><br><input type='text' name='text' id='b1' class='option1' style='width: 30px' maxlength='1'>&nbsp<input type='text' class='option1' name='text' id='b2' style='width: 30px' maxlength='1'>&nbsp<input type='text' class='option1' name='text' id='b3' style='width: 30px' maxlength='1'>&nbsp<input type='text' class='option1' name='text' id='b4' style='width: 30px' maxlength='1'>&nbsp<input type='text' class='option1' name='text' id='b5' style='width: 30px' maxlength='1'>&nbsp<input type='text' class='option1' name='text' id='b6' style='width: 30px' maxlength='1'>&nbsp<input type='text' class='option1' name='text' id='b7' style='width: 30px' maxlength='1'>&nbsp<input type='text' name='text' class='option1' id='b8' style='width: 30px' maxlength='1'><br><br><input type='button' style='font-size: 13.5pt ; font-family: Nunito;' id='button1' name='submit' value='Submit' class='button button1 rounded mx-auto d-block option' onclick='check()'><br><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='B' id='b' onclick='b(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='E' id='e' onclick='b(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='N' id='n' onclick='b(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='L' id='l' onclick='b(id)'><input type='button' class='buttons button2 option' style='width: 30px' name= 'words' value='S' id='s' onclick='b(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='S' id='s' onclick='b(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='I' id='i' onclick='b(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='G' id='g' onclick='b(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='V' id='v' onclick='b(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='H' id='h' onclick='b(id)'><br><br><h1 class='ml10'><span class='text-wrapper'><span class='letters' id='greet' style='text-align: center; color: green; font-weight: bold;'></span></span></h1><input style='font-size: 13.5pt ; font-family: Nunito;' class = 'button button1 option' type='button' name='next' id='n1' value='Next' onclick='next2()'>&nbsp<input style='font-size: 13.5pt ; font-family: Nunito;' class = 'button button1 option' type='button' name='show' id='show1' value='Show Answer' onclick='ans1()'>";
+      document.getElementById("result").innerHTML = lines;
+    }
+
+    //next function to move on to the next question
+    function next2()
+    {
+      //displays the corresponding images on that page and rest all are hidden
+      document.getElementById("img1").hidden = true;
+      document.getElementById("img2").hidden = true;
+      document.getElementById("img3").hidden = true;
+      document.getElementById("img7").hidden = true;
+      document.getElementById("img8").hidden = true;
+      document.getElementById("img9").hidden = true;
+      document.getElementById("img10").hidden = true;
+      document.getElementById("img11").hidden = true;
+      document.getElementById("img12").hidden = true;
+      document.getElementById("img13").hidden = true;
+      document.getElementById("img14").hidden = true;
+      document.getElementById("img15").hidden = true;
+
+      //displaying the three images on that page
+      document.getElementById("img4").hidden = false;
+      document.getElementById("img4").src = 'gift.jpg';
+
+      document.getElementById("img5").hidden = false;
+      document.getElementById("img5").src = 'gift2.png';
+
+      document.getElementById("img6").hidden = false;
+      document.getElementById("img6").src = 'gift3.jpg';
+
+      //arranging the three images, adding 4 text boxes, 10 random alphabets, submit button, next button and show answer button
+      var lines = "<div id = 'c1' class= 'container' style = 'text-align : center; font-family: Nunito;'><br><input type='text' name='text' id='g1' class='option1' style='width: 30px' maxlength='1'>&nbsp<input type='text' name='text' class='option1' id='g2' style='width: 30px' maxlength='1'>&nbsp<input type='text' name='text' class='option1' id='g3' style='width: 30px' maxlength='1'>&nbsp<input type='text' name='text' id='g4' class='option1' style='width: 30px' maxlength='1'><br><br><input type='button' style='font-size: 13.5pt ; font-family: Nunito;' id='button2' name='submit' value='Submit' class='button button1 rounded mx-auto d-block option' onclick='check2()'><br><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='I' id='i' onclick='g(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='N' id='n' onclick='g(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='L' id='l' onclick='g(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='D' id='d' onclick='g(id)'><input type='button' class='buttons button2 option' style='width:30px' name='words' value='G' id='g' onclick='g(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='O' id='o' onclick='g(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='T' id='t' onclick='g(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='Q' id='q' onclick='g(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='F' id='f' onclick='g(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='K' id='k' onclick='g(id)'><br><br><h1 class='ml102'><span class='text-wrapper2'><span class='letters2' id='greet2' style='text-align: center; color: green; font-weight: bold;'></span></span></h1><input style='font-size: 13.5pt ; font-family: Nunito;' class = 'button button1 option' type='button' name='next' id='n2' value='Next' onclick='next3()'>&nbsp<input style='font-size: 13.5pt ; font-family: Nunito;' class = 'button button1 option' type='button' name='show' id='show2' value='Show Answer' onclick='ans2()'>";
+      document.getElementById("result").innerHTML = lines;
+    }
+
+    //next function to move on to the next question
+    function next3()
+    {
+      //displays the corresponding images on that page and rest all are hidden
+      document.getElementById("img1").hidden = true;
+      document.getElementById("img2").hidden = true;
+      document.getElementById("img3").hidden = true;
+      document.getElementById("img4").hidden = true;
+      document.getElementById("img5").hidden = true;
+      document.getElementById("img6").hidden = true;
+      document.getElementById("img10").hidden = true;
+      document.getElementById("img11").hidden = true;
+      document.getElementById("img12").hidden = true;
+      document.getElementById("img13").hidden = true;
+      document.getElementById("img14").hidden = true;
+      document.getElementById("img15").hidden = true;
+      
+      //displaying the three images on that page
+      document.getElementById("img7").hidden = false;
+      document.getElementById("img7").src = 'gratitude1.jpg';
+
+      document.getElementById("img8").hidden = false;
+      document.getElementById("img8").src = 'gratitude2.jpg';
+
+      document.getElementById("img9").hidden = false;
+      document.getElementById("img9").src = 'gratitude3.jpg';
+
+      //arranging the three images, adding 9 text boxes, 10 random alphabets, submit button, next button and show answer button
+      var lines = "<div id = 'c1' class= 'container' style = 'text-align : center; font-family: Nunito;'><br><input type='text' name='text' id='gr1' class='option1' style='width: 30px' maxlength='1'>&nbsp<input type='text' name='text' class='option1' id='gr2' style='width: 30px' maxlength='1'>&nbsp<input type='text' class='option1' name='text' id='gr3' style='width: 30px' maxlength='1'>&nbsp<input type='text' name='text' class='option1' id='gr4' style='width: 30px' maxlength='1'>&nbsp<input type='text' name='text' class='option1' id='gr5' style='width: 30px' maxlength='1'>&nbsp<input type='text' class='option1' name='text' id='gr6' style='width: 30px' maxlength='1'>&nbsp<input type='text' class='option1' name='text' id='gr7' style='width: 30px' maxlength='1'>&nbsp<input type='text' class='option1' name='text' id='gr8' style='width: 30px' maxlength='1'>&nbsp<input type='text' class='option1' name='text' id='gr9' style='width: 30px' maxlength='1'><br><br><input type='button' style='font-size: 13.5pt ; font-family: Nunito;' id='button3' name='submit' value='Submit' class='button button1 rounded mx-auto d-block option' onclick='check3()'><br><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='A' id='a' onclick='gr(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='T' id='t' onclick='gr(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='R' id='r' onclick='gr(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='G' id='g' onclick='gr(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='I' id='i' onclick='gr(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='H' id='h' onclick='gr(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='T' id='t' onclick='gr(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='U' id='u' onclick='gr(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='E' id='e' onclick='gr(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='D' id='d' onclick='gr(id)'><br><br><h1 class='ml103'><span class='text-wrapper3'><span class='letters3' id='greet3' style='text-align: center; color: green; font-weight: bold;'></span></span></h1><input style='font-size: 13.5pt ; font-family: Nunito;' class = 'button button1 option' type='button' name='next' id='n3' value='Next' onclick='next4()'>&nbsp<input style='font-size: 13.5pt ; font-family: Nunito;' class = 'button button1 option' type='button' name='show' id='show3' value='Show Answer' onclick='ans3()'>";
+      document.getElementById("result").innerHTML = lines;
+    }
+
+    //next function to move on to the next question
+    function next4()
+    {
+      //displays the corresponding images on that page and rest all are hidden
+      document.getElementById("img1").hidden = true;
+      document.getElementById("img2").hidden = true;
+      document.getElementById("img3").hidden = true;
+      document.getElementById("img4").hidden = true;
+      document.getElementById("img5").hidden = true;
+      document.getElementById("img6").hidden = true;
+      document.getElementById("img7").hidden = true;
+      document.getElementById("img8").hidden = true;
+      document.getElementById("img9").hidden = true;
+      document.getElementById("img13").hidden = true;
+      document.getElementById("img14").hidden = true;
+      document.getElementById("img15").hidden = true;
+      
+      //displaying the three images on that page
+      document.getElementById("img10").hidden = false;
+      document.getElementById("img10").src = 'thank.png';
+
+      document.getElementById("img11").hidden = false;
+      document.getElementById("img11").src = 'thank2.jpg';
+
+      document.getElementById("img12").hidden = false;
+      document.getElementById("img12").src = 'thank3.png';
+
+      //arranging the three images, adding 8 text boxes, 10 random alphabets, submit button, next button and show answer button
+      var lines = "<div id = 'c1' class= 'container' style = 'text-align : center; font-family: Nunito;'><br><input type='text' name='text' id='t1' class='option1' style='width: 30px' maxlength='1'>&nbsp<input type='text' name='text' class='option1' id='t2' style='width: 30px' maxlength='1'>&nbsp<input type='text' class='option1' name='text' id='t3' style='width: 30px' maxlength='1'>&nbsp<input type='text' class='option1' name='text' id='t4' style='width: 30px' maxlength='1'>&nbsp<input type='text' class='option1' name='text' id='t5' style='width: 30px' maxlength='1'>&nbsp<input type='text' class='option1' name='text' id='t6' style='width: 30px' maxlength='1'>&nbsp<input type='text' class='option1' name='text' id='t7' style='width: 30px' maxlength='1'>&nbsp<input type='text' name='text' class='option1' id='t8' style='width: 30px' maxlength='1'><br><br><input type='button' style='font-size: 13.5pt ; font-family: Nunito;' id='button4' name='submit' value='Submit' class='button button1 rounded mx-auto d-block option' onclick='check4()'><br><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='Y' id='y' onclick='t(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='T' id='t' onclick='t(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='A' id='a' onclick='t(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='K' id='k' onclick='t(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='Q' id='q' onclick='t(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='R' id='r' onclick='t(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='H' id='h' onclick='t(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='N' id='n' onclick='t(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='O' id='o' onclick='t(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='U' id='u' onclick='t(id)'><br><br><h1 class='ml104'><span class='text-wrapper4'><span class='letters4' id='greet4' style='text-align: center; color: green; font-weight: bold;'></span></span></h1><input style='font-size: 13.5pt ; font-family: Nunito;' class = 'button button1 option' type='button' name='next' id='n4' value='Next' onclick='next5()'>&nbsp<input style='font-size: 13.5pt ; font-family: Nunito;' class = 'button button1 option' type='button' name='show' id='show4' value='Show Answer' onclick='ans4()'>";
+      document.getElementById("result").innerHTML = lines;
+    }
+
+    //next function to move on to the next question
+    function next5()
+    {
+      //displays the corresponding images on that page and rest all are hidden
+      document.getElementById("img1").hidden = true;
+      document.getElementById("img2").hidden = true;
+      document.getElementById("img3").hidden = true;
+      document.getElementById("img4").hidden = true;
+      document.getElementById("img5").hidden = true;
+      document.getElementById("img6").hidden = true;
+      document.getElementById("img7").hidden = true;
+      document.getElementById("img8").hidden = true;
+      document.getElementById("img9").hidden = true;
+      document.getElementById("img10").hidden = true;
+      document.getElementById("img11").hidden = true;
+      document.getElementById("img12").hidden = true;
+     
+      //displaying the three images on that page
+      document.getElementById("img13").hidden = false;
+      document.getElementById("img13").src = 'app1.jpg';
+
+      document.getElementById("img14").hidden = false;
+      document.getElementById("img14").src = 'app2.jpg';
+
+      document.getElementById("img15").hidden = false;
+      document.getElementById("img15").src = 'app3.jpg';
+
+      //arranging the three images, adding 12 text boxes, 13 random alphabets, submit button, next button and show answer button
+      var lines = "<div id = 'c1' class= 'container' style = 'text-align : center; font-family: Nunito;'><br><input type='text' name='text' id='a1' class='option1' style='width: 30px' maxlength='1'>&nbsp<input type='text' name='text' class='option1' id='a2' style='width: 30px' maxlength='1'>&nbsp<input type='text' class='option1' name='text' id='a3' style='width: 30px' maxlength='1'>&nbsp<input type='text' name='text' class='option1' id='a4' style='width: 30px' maxlength='1'>&nbsp<input type='text' class='option1' name='text' id='a5' style='width: 30px' maxlength='1'>&nbsp<input type='text' class='option1' name='text' id='a6' style='width: 30px' maxlength='1'>&nbsp<input type='text' class='option1' name='text' id='a7' style='width: 30px' maxlength='1'>&nbsp<input type='text' name='text' class='option1' id='a8' style='width: 30px' maxlength='1'>&nbsp<input type='text' class='option1' name='text' id='a9' style='width: 30px' maxlength='1'>&nbsp<input type='text' class='option1' name='text' id='a10' style='width: 30px' maxlength='1'>&nbsp<input type='text' class='option1' name='text' id='a11' style='width: 30px' maxlength='1'>&nbsp<input type='text' name='text' class='option1' id='a12' style='width: 30px' maxlength='1'><br><br><input type='button' style='font-size: 13.5pt ; font-family: Nunito;' id='button5' name='submit' value='Submit' class='button button1 rounded mx-auto d-block option' onclick='check5()'><br><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='P' id='p' onclick='a(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='R' id='r' onclick='a(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='T' id='t' onclick='a(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='A' id='a' onclick='a(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='C' id='c' onclick='a(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='I' id='i' onclick='a(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='A' id='a' onclick='a(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='P' id='p' onclick='a(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='N' id='n' onclick='a(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='Y' id='y' onclick='a(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='E' id='e' onclick='a(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='O' id='o' onclick='a(id)'><input type='button' class='buttons button2 option' style='width: 30px' name='words' value='I' id='i' onclick='a(id)'><br><br><h1 class='ml105'><span class='text-wrapper5'><span class='letters5' id='greet5' style='text-align: center; color: green; font-weight: bold;'></span></span></h1><input style='font-size: 13.5pt ; font-family: Nunito;' class = 'button button1 option' type='button' name='next' id='n5' value='Next' onclick='next5()'>&nbsp<input style='font-size: 13.5pt ; font-family: Nunito;' class = 'button button1 option' type='button' name='show' id='show5' value='Show Answer' onclick='ans5()'>";
+      document.getElementById("result").innerHTML = lines;
+      document.getElementById("n5").disabled = true;
+    }
+  </script>
+
+
+
+
+  
+
+</head>
+
+<nav class="navbar navbar-light bg-light fixed-top">
+    <div class="row" style="width:100%">
+        <div class="col-md-6">
+            <div id="clockdiv">
+                <div>
+                    <span class="minutes"></span>
+                    <div class="smalltext">Minutes</div>
+                </div>
+                <div>
+                    <span class="seconds"></span>
+                    <div class="smalltext">Seconds</div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="col-md-4 text-center"> -->
+                <!-- <img src="{{asset('imgs/gratitude/word-scramble.png')}}" alt="App Logo" style="height: 10rem;"> -->
+        <!-- </div>  -->
+        <div class="col-md-6">
+            <div class="score-box" id="scoring">
+                Your Score is 0
+            </div>
+        </div>
+    </div>
+    
+</nav>
+
+<body>
+
+
+
+
+<!--Particle JS for the background-->
+  <div id="particles-js"></div>
+  <script type="text/javascript" src="particles.js"></script>
+  <script type="text/javascript" src="app.js"></script>
+<!----->
+
+  <audio src="Fast-clock-ticking-sound-effect.mp3" id="my_audio" loop="loop"></audio>
+  <audio src="Train Horn Low-SoundBible.com-1744689113.mp3" id="my_end"></audio>
+  <audio src="coindrop.mp3" id="drop" loop="loop"></audio>
+  <script type="text/javascript">
+    window.onload=function(){
+      var aud = document.getElementById("my_audio").play();
+    }
+  </script>
+  <div class="d-flex justify-content-center bg-secondary mb-3">
+</div>
+
+   
+  <h3 id="scoring" style="font-size: 18pt ; font-family: Cabin Sketch; color: #FF54FA ; float: right;"></h3><br><br><br><br><br><br><br>
+  <center><h2 id="totscore" style="font-family: Cabin Sketch; font-weight: bold; color: #FF54FA"></h2></center>
+    <center><h2 id="totcoins" style="font-family: Cabin Sketch; font-weight: bold; color: #FF54FA"></h2></center>
+    <center><img src="coins.gif" id="coins" hidden="true" width="200px" height="200px"></center>
+  <br>
+  <h1 id="congrats" style="text-align: center; font-family: Cabin Sketch;"></h1>
+  <div class="container" align="center">
+    <img src="party1.gif" id="part1" hidden="true" width="300px" height="400px">
+    <img src="good job.gif" id="goodjob" hidden="true" width="300px" height="400px">
+    <img src="party1.gif" id="part2" hidden="true" width="300px" height="400px">
+  </div>
+  <br><br>
+  <div class="container" align="center">
+  <img id="img1" width="200px" height="200px" hidden="true" class="option" style="border-radius: 10px">&nbsp&nbsp&nbsp&nbsp
+  <img id="img2" width="200px" height="200px" hidden="true" class="option" style="border-radius: 10px">&nbsp&nbsp&nbsp&nbsp
+  <img id="img3" width="200px" height="200px" hidden="true" class="option" style="border-radius: 10px">&nbsp&nbsp&nbsp&nbsp
+  </div>
+  <div class="container" align="center">
+  <img id="img4" width="200px" height="200px" hidden="true" class="option" style="border-radius: 10px">&nbsp&nbsp&nbsp&nbsp
+  <img id="img5" width="200px" height="200px" hidden="true" class="option" style="border-radius: 10px">&nbsp&nbsp&nbsp&nbsp
+  <img id="img6" width="200px" height="200px" hidden="true" class="option" style="border-radius: 10px">&nbsp&nbsp&nbsp&nbsp
+  </div>
+  <div class="container" align="center">
+  <img id="img7" width="200px" height="200px" hidden="true" class="option" style="border-radius: 10px">&nbsp&nbsp&nbsp&nbsp
+  <img id="img8" width="200px" height="200px" hidden="true" class="option" style="border-radius: 10px">&nbsp&nbsp&nbsp&nbsp
+  <img id="img9" width="200px" height="200px" hidden="true" class="option" style="border-radius: 10px">&nbsp&nbsp&nbsp&nbsp
+  </div>
+  <div class="container" align="center">
+  <img id="img10" width="200px" height="200px" hidden="true" class="option" style="border-radius: 10px">&nbsp&nbsp&nbsp&nbsp
+  <img id="img11" width="200px" height="200px" hidden="true" class="option" style="border-radius: 10px">&nbsp&nbsp&nbsp&nbsp
+  <img id="img12" width="200px" height="200px" hidden="true" class="option" style="border-radius: 10px">&nbsp&nbsp&nbsp&nbsp
+  </div>
+  <div class="container" align="center">
+  <img id="img13" width="200px" height="200px" hidden="true" class="option" style="border-radius: 10px">&nbsp&nbsp&nbsp&nbsp
+  <img id="img14" width="200px" height="200px" hidden="true" class="option" style="border-radius: 10px">&nbsp&nbsp&nbsp&nbsp
+  <img id="img15" width="200px" height="200px" hidden="true" class="option" style="border-radius: 10px">&nbsp&nbsp&nbsp&nbsp
+  </div>
+  <p id="result"></p>
+  <!-- calling the next1 function to start the activity from beginning-->
+    <script type="text/javascript">
+      next1();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Worksheet</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,700,800,900&display=swap" rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+     <link rel="stylesheet" type="text/css" href="bootstrap.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous">
+    </script>
+
+<!--Timer part-->   
+    <script>
+    function getTimeRemaining(endtime) {
+        var t = Date.parse(endtime) - Date.parse(new Date());
+        var seconds = Math.floor((t / 1000) % 60);
+        var minutes = Math.floor((t / 1000 / 60) % 60);
+        var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+        var days = Math.floor(t / (1000 * 60 * 60 * 24));
+        return {
+            'total': t,
+            'days': days,
+            'hours': hours,
+            'minutes': minutes,
+            'seconds': seconds
+        };
+    }
+
+    function initializeClock(id, endtime) {
+    var clock = document.getElementById(id);
+    var minutesSpan = clock.querySelector('.minutes');
+    var secondsSpan = clock.querySelector('.seconds');
+
+    function updateClock() {
+        var t = getTimeRemaining(endtime);
+
+        minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+        secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
+        if($('.minutes').text() == '00' && $('.seconds').text() == '00')
+        {
+          document.getElementById("b1").disabled = true;
+        document.getElementById("a1").disabled = true;
+            
+            document.getElementById("b2").disabled = true;
+        document.getElementById("a2").disabled = true;
+            
+            document.getElementById("b3").disabled = true;
+        document.getElementById("a3").disabled = true;
+            
+            document.getElementById("b4").disabled = true;
+        document.getElementById("a4").disabled = true;
+            
+            document.getElementById("b5").disabled = true;
+        document.getElementById("a5").disabled = true;
+            
+            document.getElementById("b6").disabled = true;
+        document.getElementById("a6").disabled = true;
+            
+            document.getElementById("b7").disabled = true;
+        document.getElementById("a7").disabled = true;
+            
+            document.getElementById("b8").disabled = true;
+        document.getElementById("a8").disabled = true;
+        document.getElementById("a9").disabled = true;
+            
+            
+        document.getElementById("tf1").disabled = true;
+            
+            
+        document.getElementById("tf2").disabled = true;
+            
+            
+        document.getElementById("tf3").disabled = true;
+            
+            
+        document.getElementById("tf4").disabled = true;
+            
+            
+        document.getElementById("tf5").disabled = true;
+        document.getElementById("s1").disabled = true;
+            document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+            document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+            document.getElementById("coins").hidden = false;
+            document.getElementById("drop").play();
+            document.getElementById("my_audio").pause();
+            document.getElementById("my_end").play();
+            delay(5000);
+            document.getElementById("my_end").pause();
+        }
+
+        if (t.total <= 0) {
+        clearInterval(timeinterval);
+        }
+    }
+
+    updateClock();
+    var timeinterval = setInterval(updateClock, 1000);
+    }
+
+    var deadline = new Date(Date.parse(new Date()) + 20 * 1000);
+    initializeClock('clockdiv', deadline);
+</script>
+<!-------->
+
+  
+    <style type="text/css">
+      body{
+        background-color: #FFF5FD;
+      }
+    	input[type=text], select {
+  		width: 13%;
+  		padding: 8px 16px;
+  		margin: 8px 0;
+  		display: inline-block;
+  		border: 1px solid #ccc;
+  		border-radius: 4px;
+  		box-sizing: border-box;
+  		text-align: center;
+  		font-size: 12pt;
+  		font-family: Nunito;
+	}
+
+	.button {
+  background-color: #4CAF50; 
+  border: none;
+  color: white;
+  padding: 1px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; 
+  transition-duration: 0.4s;
+  cursor: pointer;
+  font-family: Nunito;
+  border-radius: 20px;
+}
+
+.button1 {
+  background-color: white;
+  color: black;
+  border: 2px solid #5562eb;
+}
+
+.button1:hover {
+  background-color: #5562eb;
+  color: white;
+}
+
+.button1:active{
+  background-color: #54E0C7;
+}
+
+	.ml6 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.3em;
+}
+
+.ml6 .text-wrapper {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+
+.ml6 .letter {
+  display: inline-block;
+  line-height: 1em;
+  color: green;
+  font-size: 20pt;
+}
+
+.ml62 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.3em;
+}
+
+.ml62 .text-wrapper2 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+
+.ml62 .letter2 {
+  display: inline-block;
+  line-height: 1em;
+  color: green;
+  font-size: 20pt;
+}
+
+.ml63 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.3em;
+}
+
+.ml63 .text-wrapper3 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+
+.ml63 .letter3 {
+  display: inline-block;
+  line-height: 1em;
+  color: green;
+  font-size: 20pt;
+}
+
+.ml64 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.3em;
+}
+
+.ml64 .text-wrapper4 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+
+.ml64 .letter4 {
+  display: inline-block;
+  line-height: 1em;
+  color: green;
+  font-size: 20pt;
+}
+
+.ml65 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.3em;
+}
+
+.ml65 .text-wrapper5 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+
+.ml65 .letter5 {
+  display: inline-block;
+  line-height: 1em;
+  color: green;
+  font-size: 20pt;
+}
+
+.ml66 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.3em;
+}
+
+.ml66 .text-wrapper6 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+
+.ml66 .letter6 {
+  display: inline-block;
+  line-height: 1em;
+  color: green;
+  font-size: 20pt;
+}
+
+.ml67 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.3em;
+}
+
+.ml67 .text-wrapper7 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+
+.ml67 .letter7 {
+  display: inline-block;
+  line-height: 1em;
+  color: green;
+  font-size: 20pt;
+}
+
+.ml68 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.3em;
+}
+
+.ml68 .text-wrapper8 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+
+.ml68 .letter8 {
+  display: inline-block;
+  line-height: 1em;
+  color: green;
+  font-size: 20pt;
+}
+
+.ml69 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.3em;
+}
+
+.ml69 .text-wrapper9 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+
+.ml69 .letter9 {
+  display: inline-block;
+  line-height: 1em;
+  color: green;
+  font-size: 20pt;
+}
+
+.ml610 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.3em;
+}
+
+.ml610 .text-wrapper10 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+
+.ml610 .letter10 {
+  display: inline-block;
+  line-height: 1em;
+  color: green;
+  font-size: 20pt;
+}
+
+.ml611 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.3em;
+}
+
+.ml611 .text-wrapper11 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+
+.ml611 .letter11 {
+  display: inline-block;
+  line-height: 1em;
+  color: green;
+  font-size: 20pt;
+}
+
+.ml612 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.3em;
+}
+
+.ml612 .text-wrapper12 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+
+.ml612 .letter12 {
+  display: inline-block;
+  line-height: 1em;
+  color: green;
+  font-size: 20pt;
+}
+
+.ml613 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.3em;
+}
+
+.ml613 .text-wrapper13 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+
+.ml613 .letter13 {
+  display: inline-block;
+  line-height: 1em;
+  color: green;
+  font-size: 20pt;
+}
+
+.ml2 {
+  font-weight: bold;
+  font-size: 35pt;
+}
+
+.ml2 .letter {
+  display: inline-block;
+  line-height: 1em;
+  font-size: 35pt;
+}
+
+#particles-js canvas {
+    display: block;
+    /* vertical-align: bottom; */
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+    -webkit-transition: opacity .8s ease, -webkit-transform 1.4s ease;
+    transition: opacity .8s ease, transform 1.4s ease
+}
+
+#particles-js
+{
+  height: 450%;
+  width: 100%;
+  background: #FFF5FD;
+  opacity: 0.7;
+  position: absolute;
+  z-index: -1;
+}
+
+nav {
+    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.score-box {
+    text-align: right;
+    font-family: 'Cabin Sketch';
+    font-weight: bolder;
+    font-size: 40px;
+    letter-spacing: 0.5rem;
+    padding-top: 2rem;
+}
+
+#clockdiv {
+    vertical-align: middle;
+    margin-left: 25px;
+    font-family: sans-serif;
+    color: #fff;
+    display: inline-block;
+    font-weight: 100;
+    text-align: center;
+    font-size: 30px;
+}
+
+#clockdiv>div {
+    padding: 10px;
+    border-radius: 3px;
+    background: #000;
+    display: inline-block;
+}
+
+#clockdiv div>span {
+    padding: 15px;
+    border-radius: 3px;
+    background: #000;
+    display: inline-block;
+}
+
+.smalltext {
+    padding-top: 5px;
+    font-size: 16px;
+}
+
+.option {
+    margin: 0 auto;
+    border-radius: 10px;
+    background-color: rgb(233, 233, 233);
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    -webkit-transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+}
+
+.option:hover {
+    -webkit-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+    </style>
+    <script type="text/javascript">
+    	var score = 0;
+
+      //Show answer button function
+      function ans1()
+      {
+        document.getElementById("ans1").innerHTML = "gratitude";
+        document.getElementById("b1").disabled = true;
+      }
+
+      //checking the correct answer
+    	function check1()
+    	{
+    		if(document.getElementById("a1").value == "gratitude")
+    		{
+    			score++;
+    			document.getElementById("scoring").innerHTML = "Your Score is " + score;
+    			document.getElementById("ans1").innerHTML = "Correct";
+    			
+  				document.getElementById("b1").disabled = true;
+  				document.getElementById("a1").disabled = true;
+  				if(score == 13)
+		{
+			// Wrap every letter in a span
+			document.getElementById("congrats").innerHTML = "Congratulations You solved the worksheet correct";
+      document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+			
+        document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+            document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+            document.getElementById("coins").hidden = false;
+            document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+		}
+    		}
+    		else
+    		{
+    			var str = "<h6 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! The answer is Incorrect!! Try again.</h6>";
+        		var res = str.fontcolor("red");
+        		document.getElementById("ans1").innerHTML = res;
+    		}
+    	}
+
+      //Show answer button function
+        function ans2()
+      {
+        document.getElementById("ans2").innerHTML = "regards";
+        document.getElementById("b2").disabled = true;
+      }
+
+        //checking the correct answer
+    		function check2()
+    	{
+    		if(document.getElementById("a2").value == "regards")
+    		{
+    			score++;
+    			document.getElementById("scoring").innerHTML = "Your Score is " + score;
+    			document.getElementById("ans2").innerHTML = "Correct";
+    			
+  				document.getElementById("b2").disabled = true;
+  				document.getElementById("a2").disabled = true;
+  				if(score == 13)
+		{
+			// Wrap every letter in a span
+			document.getElementById("congrats").innerHTML = "Congratulations You solved the worksheet correct";
+      document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+			
+        document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+            document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+            document.getElementById("coins").hidden = false;
+            document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+		}
+    		}
+    		else
+    		{
+    			var str = "<h6 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! The answer is Incorrect!! Try again.</h6>";
+        		var res = str.fontcolor("red");
+        		document.getElementById("ans2").innerHTML = res;
+    		}
+    	}
+
+      //Show answer button function
+      function ans3()
+      {
+        document.getElementById("ans3").innerHTML = "entitlement";
+        document.getElementById("b3").disabled = true;
+      }
+
+        //checking the correct answer
+    		function check3()
+    	{
+    		if(document.getElementById("a3").value == "entitlement")
+    		{
+    			score++;
+    			document.getElementById("scoring").innerHTML = "Your Score is " + score;
+    			document.getElementById("ans3").innerHTML = "Correct";
+    			
+  				document.getElementById("b3").disabled = true;
+  				document.getElementById("a3").disabled = true;
+  				if(score == 13)
+		{
+			// Wrap every letter in a span
+			document.getElementById("congrats").innerHTML = "Congratulations You solved the worksheet correct";
+      document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+			
+        document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+            document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+            document.getElementById("coins").hidden = false;
+            document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+		}
+    		}
+    		else
+    		{
+    			var str = "<h6 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! The answer is Incorrect!! Try again.</h6>";
+        		var res = str.fontcolor("red");
+        		document.getElementById("ans3").innerHTML = res;
+    		}
+    	}
+
+      //Show answer button function
+      function ans4()
+      {
+        document.getElementById("ans4").innerHTML = "grateful";
+        document.getElementById("b4").disabled = true;
+      }
+
+        //checking the correct answer
+    	function check4()
+    	{
+    		if(document.getElementById("a4").value == "grateful")
+    		{
+    			score++;
+    			document.getElementById("scoring").innerHTML = "Your Score is " + score;
+    			document.getElementById("ans4").innerHTML = "Correct";
+    			
+  				document.getElementById("b4").disabled = true;
+  				document.getElementById("a4").disabled = true;
+  				if(score == 13)
+		{
+			// Wrap every letter in a span
+			document.getElementById("congrats").innerHTML = "Congratulations You solved the worksheet correct";
+      document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+			
+        document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+            document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+            document.getElementById("coins").hidden = false;
+            document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+		}
+    		}
+    		else
+    		{
+    			var str = "<h6 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! The answer is Incorrect!! Try again.</h6>";
+        		var res = str.fontcolor("red");
+        		document.getElementById("ans4").innerHTML = res;
+    		}
+    	}
+
+      //Show answer button function
+      function ans5()
+      {
+        document.getElementById("ans5").innerHTML = "sorrow";
+        document.getElementById("b5").disabled = true;
+      }
+
+        //checking the correct answer
+    	function check5()
+    	{
+    		if(document.getElementById("a5").value == "sorrow")
+    		{
+    			score++;
+    			document.getElementById("scoring").innerHTML = "Your Score is " + score;
+    			document.getElementById("ans5").innerHTML = "Correct";
+    			
+  				document.getElementById("b5").disabled = true;
+  				document.getElementById("a5").disabled = true;
+  				if(score == 13)
+		{
+			// Wrap every letter in a span
+			document.getElementById("congrats").innerHTML = "Congratulations You solved the worksheet correct";
+      document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+			
+        document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+            document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+            document.getElementById("coins").hidden = false;
+            document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+		}
+    		}
+    		else
+    		{
+    			var str = "<h6 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! The answer is Incorrect!! Try again.</h6>";
+        		var res = str.fontcolor("red");
+        		document.getElementById("ans5").innerHTML = res;
+    		}
+    	}
+
+      //Show answer button function
+      function ans6()
+      {
+        document.getElementById("ans6").innerHTML = "gratitude";
+        document.getElementById("b6").disabled = true;
+      }
+
+        //checking the correct answer
+    	function check6()
+    	{
+    		if(document.getElementById("a6").value == "gratitude")
+    		{
+    			score++;
+    			document.getElementById("scoring").innerHTML = "Your Score is " + score;
+    			document.getElementById("ans6").innerHTML = "Correct";
+    			
+  				document.getElementById("b6").disabled = true;
+  				document.getElementById("a6").disabled = true;
+  				if(score == 13)
+		{
+			// Wrap every letter in a span
+			document.getElementById("congrats").innerHTML = "Congratulations You solved the worksheet correct";
+      document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+			
+        document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+            document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+            document.getElementById("coins").hidden = false;
+            document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+		}
+    		}
+    		else
+    		{
+    			var str = "<h6 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! The answer is Incorrect!! Try again.</h6>";
+        		var res = str.fontcolor("red");
+        		document.getElementById("ans6").innerHTML = res;
+    		}
+    	}
+
+      //Show answer button function
+      function ans7()
+      {
+        document.getElementById("ans7").innerHTML = "prayers";
+        document.getElementById("b7").disabled = true;
+      }
+
+      //checking the correct answer
+    	function check7()
+    	{
+    		if(document.getElementById("a7").value == "prayers")
+    		{
+    			score++;
+    			document.getElementById("scoring").innerHTML = "Your Score is " + score;
+    			document.getElementById("ans7").innerHTML = "Correct";
+    			
+  				document.getElementById("b7").disabled = true;
+  				document.getElementById("a7").disabled = true;
+  				if(score == 13)
+		{
+			// Wrap every letter in a span
+			document.getElementById("congrats").innerHTML = "Congratulations You solved the worksheet correct";
+      document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+			
+        document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+            document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+            document.getElementById("coins").hidden = false;
+            document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+		}
+    		}
+    		else
+    		{
+    			var str = "<h6 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! The answer is Incorrect!! Try again.</h6>";
+        		var res = str.fontcolor("red");
+        		document.getElementById("ans7").innerHTML = res;
+    		}
+    	}
+
+      //Show answer button function`
+      function ans8()
+      {
+        document.getElementById("ans8").innerHTML = "join and pray";
+        document.getElementById("b1").disabled = true;
+      }
+
+      //checking the correct answer
+    	function check8()
+    	{
+    		if(document.getElementById("a8").value == "join" && document.getElementById("a9").value == "pray")
+    		{
+    			score++;
+    			document.getElementById("scoring").innerHTML = "Your Score is " + score;
+    			document.getElementById("ans8").innerHTML = "Correct";
+    			
+  				document.getElementById("b8").disabled = true;
+  				document.getElementById("a8").disabled = true;
+  				document.getElementById("a9").disabled = true;
+  				if(score == 13)
+		{
+			// Wrap every letter in a span
+			document.getElementById("congrats").innerHTML = "Congratulations You solved the worksheet correct";
+      document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+			
+        document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+            document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+            document.getElementById("coins").hidden = false;
+            document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+		}
+    		}
+    		else
+    		{
+    			var str = "<h6 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! The answer is Incorrect!! Try again.</h6>";
+        		var res = str.fontcolor("red");
+        		document.getElementById("ans8").innerHTML = res;
+    		}
+    	}
+
+    	function submit()
+    	{
+        document.getElementById("s1").disabled = true;
+    		if(document.getElementById("tf1").value == "true")
+    		{
+    			score++;
+    			document.getElementById("scoring").innerHTML = "Your Score is " + score;
+    			document.getElementById("ans9").innerHTML = "Correct";
+    			
+  				document.getElementById("tf1").disabled = true;
+    		}
+    		else
+    		{
+    			var str = "<h6 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! The answer is true.</h6>";
+        		var res = str.fontcolor("red");
+        		document.getElementById("ans9").innerHTML = res;
+    		}
+    	
+    		if(document.getElementById("tf2").value == "true")
+    		{
+    			score++;
+    			document.getElementById("scoring").innerHTML = "Your Score is " + score;
+    			document.getElementById("ans10").innerHTML = "Correct";
+    			
+  				document.getElementById("tf2").disabled = true;
+    		}
+    		else
+    		{
+    			var str = "<h6 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! The answer is true.</h6>";
+        		var res = str.fontcolor("red");
+        		document.getElementById("ans10").innerHTML = res;
+    		}
+    
+    		if(document.getElementById("tf3").value == "false")
+    		{
+    			score++;
+    			document.getElementById("scoring").innerHTML = "Your Score is " + score;
+    			document.getElementById("ans11").innerHTML = "Correct";
+    			
+  				document.getElementById("tf3").disabled = true;
+    		}
+    		else
+    		{
+    			var str = "<h6 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! The answer is false.</h6>";
+        		var res = str.fontcolor("red");
+        		document.getElementById("ans11").innerHTML = res;
+    		}
+    
+    		if(document.getElementById("tf4").value == "true")
+    		{
+    			score++;
+    			document.getElementById("scoring").innerHTML = "Your Score is " + score;
+    			document.getElementById("ans12").innerHTML = "Correct";
+    			
+  				document.getElementById("tf4").disabled = true;
+    		}
+    		else
+    		{
+    			var str = "<h6 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! The answer is true.</h6>";
+        		var res = str.fontcolor("red");
+        		document.getElementById("ans12").innerHTML = res;
+    		}
+
+    		if(document.getElementById("tf5").value == "true")
+    		{
+    			score++;
+    			document.getElementById("scoring").innerHTML = "Your Score is " + score;
+    			document.getElementById("ans13").innerHTML = "Correct";
+    			
+  				document.getElementById("tf5").disabled = true;
+    		}
+    		else
+    		{
+    			var str = "<h6 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! The answer is true.</h6>";
+        		var res = str.fontcolor("red");
+        		document.getElementById("ans13").innerHTML = res;
+    		}
+
+        if(score == 13)
+    {
+      // Wrap every letter in a span
+      document.getElementById("congrats").innerHTML = "Congratulations You solved the worksheet correct";
+      document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+      
+        document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+            document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+            document.getElementById("coins").hidden = false;
+            document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+    }
+  }
+    </script>
+</head>
+<body>
+
+  <nav class="navbar navbar-light bg-light fixed-top">
+    <div class="row" style="width:100%">
+        <div class="col-md-6">
+            <div id="clockdiv">
+                <div>
+                    <span class="minutes"></span>
+                    <div class="smalltext">Minutes</div>
+                </div>
+                <div>
+                    <span class="seconds"></span>
+                    <div class="smalltext">Seconds</div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="col-md-4 text-center"> -->
+                <!-- <img src="{{asset('imgs/gratitude/word-scramble.png')}}" alt="App Logo" style="height: 10rem;"> -->
+        <!-- </div>  -->
+        <div class="col-md-6">
+            <div class="score-box" id="scoring">
+                Your Score is 0
+            </div>
+        </div>
+    </div>
+    
+</nav>
+
+<!-- Particle JS in the background-->
+  <div id="particles-js"></div>
+  <script type="text/javascript" src="particles.js"></script>
+  <script type="text/javascript" src="app.js"></script>
+<!-------->
+
+  <audio src="Fast-clock-ticking-sound-effect.mp3" id="my_audio" loop="loop"></audio>
+  <audio src="Train Horn Low-SoundBible.com-1744689113.mp3" id="my_end"></audio>
+  <audio src="coindrop.mp3" id="drop" loop="loop"></audio>
+  <script type="text/javascript">
+    window.onload=function(){
+      var aud = document.getElementById("my_audio").play();
+    }
+  </script>
+ <div class="d-flex justify-content-center bg-secondary mb-3">
+</div>
+    
+  <h3 id="scoring" style="font-size: 18pt ; font-family: Cabin Sketch; color: #FF54FA ; float: right;"></h3>
+  <center><h2 id="totscore" style="font-family: Cabin Sketch; font-weight: bold; color: #FF54FA"></h2></center>
+    <center><h2 id="totcoins" style="font-family: Cabin Sketch; font-weight: bold; color: #FF54FA"></h2></center>
+    <center><img src="coins.gif" id="coins" hidden="true" width="200px" height="200px"></center>
+	<h1 class="ml2" id="congrats" style="text-align: center; font-family: Cabin Sketch;"></h1>
+  <div class="container" align="center">
+    <img src="party1.gif" id="part1" hidden="true" width="300px" height="400px">
+    <img src="good job.gif" id="goodjob" hidden="true" width="300px" height="400px">
+    <img src="party1.gif" id="part2" hidden="true" width="300px" height="400px">
+  </div>
+	<div class="container">
+	<div class="panel panel-danger">
+      <div class="panel-heading"><center><h4 style="font-family: Cabin Sketch; font-size: 26pt; color: gray; font-weight: bold;">Fill in the blanks</h4></center></div>
+      <div class="panel-body">
+    
+	
+		<h6 style="font-size: 13.5pt ; font-family: Nunito; font-weight: bold; color: black">1. State of being grateful is known as <input type="text" class="option" name="q1" id="a1"> .</h6>
+		<input type="button" style="font-size: 13.5pt" class="button button1 option" id="b1" name="submit" value="Submit" onclick="check1()">
+    <center><input type="button" style="font-size: 13.5pt" class="button button1 option" id="show1" name="submit" value="Show Answer" onclick="ans1()"></center>
+		<h1 class="ml6">
+  		<span class="text-wrapper">
+    	<span class="letters" id="ans1" style="font-family: Nunito; color: green;"></span>
+  		</span>
+		</h1>
+
+		<h6 style="font-size: 13.5pt ; font-family: Nunito; font-weight: bold; color: black">2. People who possess the sense of gratitude gives <input type="text" class="option" name="q2" id="a2"> to people.</h6>
+		<input type="button" style="font-size: 13.5pt" class="button button1 option" id="b2" name="submit" value="Submit" onclick="check2()">
+    <center><input type="button" style="font-size: 13.5pt" class="button button1 option" id="show2" name="submit" value="Show Answer" onclick="ans2()"></center>
+		<h1 class="ml62">
+  		<span class="text-wrapper2">
+    	<span class="letters2" id="ans2" style="font-family: Nunito; color: green;"></span>
+  		</span>
+		</h1>
+
+		<h6 style="font-size: 13.5pt ; font-family: Nunito; font-weight: bold; color: black">3. People with sense of <input type="text" name="q3" id="a3" class="option"> focus on what's missing.</h6>
+		<input type="button" style="font-size: 13.5pt" class="button button1 option" id="b3" name="submit" value="Submit" onclick="check3()">
+    <center><input type="button" style="font-size: 13.5pt" class="button button1 option" id="show3" name="submit" value="Show Answer" onclick="ans3()"></center>
+		<h1 class="ml63">
+  		<span class="text-wrapper3">
+    	<span class="letters3" id="ans3" style="font-family: Nunito; color: green;"></span>
+  		</span>
+		</h1>
+
+		<h6 style="font-size: 13.5pt ; font-family: Nunito; font-weight: bold; color: black">4. <input type="text" class="option" name="q4" id="a4"> people celebrate and live in the present.</h6>
+		<input type="button" style="font-size: 13.5pt" class="button button1 option" id="b4" name="submit" value="Submit" onclick="check4()">
+    <center><input type="button" style="font-size: 13.5pt" class="button button1 option" id="show4" name="submit" value="Show Answer" onclick="ans4()"></center>
+		<h1 class="ml64">
+  		<span class="text-wrapper4">
+    	<span class="letters4" id="ans4" style="font-family: Nunito; color: green;"></span>
+  		</span>
+		</h1>
+
+		<h6 style="font-size: 13.5pt ; font-family: Nunito; font-weight: bold; color: black">5. People possessing sense of entitlement always experiences <input type="text" class="option" name="q5" id="a5"> in life.</h6>
+		<input type="button" style="font-size: 13.5pt" class="button button1 option" id="b5" name="submit" value="Submit" onclick="check5()">
+    <center><input type="button" style="font-size: 13.5pt" class="button button1 option" id="show5" name="submit" value="Show Answer" onclick="ans5()"></center>
+		<h1 class="ml65">
+  		<span class="text-wrapper5">
+    	<span class="letters5" id="ans5" style="font-family: Nunito; color: green;"></span>
+  		</span>
+		</h1>
+
+		<h6 style="font-size: 13.5pt ; font-family: Nunito; font-weight: bold; color: black">6. Ishika’s grandfather recovered from a heart injury, for which she expressed her <input type="text" class="option" name="q6" id="a6"> to the Almighty.</h6>
+		<input type="button" style="font-size: 13.5pt" class="button button1 option" id="b6" name="submit" value="Submit" onclick="check6()">
+    <center><input type="button" style="font-size: 13.5pt" class="button button1 option" id="show6" name="submit" value="Show Answer" onclick="ans6()"></center>
+		<h1 class="ml66">
+  		<span class="text-wrapper6">
+    	<span class="letters6" id="ans6" style="font-family: Nunito; color: green;"></span>
+  		</span>
+		</h1>
+
+		<h6 style="font-size: 13.5pt ; font-family: Nunito; font-weight: bold; color: black">7. Vandana wakes up early every morning to offer <input type="text" class="option" name="q7" id="a7"> with her mother.</h6>
+		<input type="button" style="font-size: 13.5pt" class="button button1 option" id="b7" name="submit" value="Submit" onclick="check7()">
+    <center><input type="button" style="font-size: 13.5pt" class="button button1 option" id="show7" name="submit" value="Show Answer" onclick="ans7()"></center>
+		<h1 class="ml67">
+  		<span class="text-wrapper7">
+    	<span class="letters7" id="ans7" style="font-family: Nunito; color: green;"></span>
+  		</span>
+		</h1>
+
+		<h6 style="font-size: 13.5pt ; font-family: Nunito; font-weight: bold; color: black">8. Before starting a meal, we should <input type="text" name="q8" class="option" id="a8"> our hands and <input type="text" class="option" name="q9" id="a9"> .</h6>
+		<input type="button" style="font-size: 13.5pt" class="button button1 option" id="b8" name="submit" value="Submit" onclick="check8()">
+    <center><input type="button" style="font-size: 13.5pt" class="button button1 option" id="show8" name="submit" value="Show Answer" onclick="ans8()"></center>
+		<h1 class="ml68">
+  		<span class="text-wrapper8">
+    	<span class="letters8" id="ans8" style="font-family: Nunito; color: green;"></span>
+  		</span>
+		</h1>
+	</div>
+	</div>
+
+	<div class="panel panel-danger">
+      <div class="panel-heading"><center><h4 style="font-family: Cabin Sketch; font-size: 26pt; font-weight: bold; color: gray;">True or False</h4></center></div>
+      <div class="panel-body">
+      	<h6 style="font-size: 13.5pt ; font-family: Nunito; font-weight: bold; color: black">1. Grateful people are happier <input type="text" name="q1" class="option" id="tf1"></h6>
+		<h1 class="ml69">
+  		<span class="text-wrapper9">
+    	<span class="letters9" id="ans9" style="font-family: Nunito; color: green;"></span>
+  		</span>
+		</h1>
+
+		<h6 style="font-size: 13.5pt ; font-family: Nunito; font-weight: bold; color: black">2. People with sense of entitlement have envious nature <input type="text" class="option" name="q2" id="tf2"></h6>
+		<h1 class="ml610">
+  		<span class="text-wrapper10">
+    	<span class="letters10" id="ans10" style="font-family: Nunito; color: green;"></span>
+  		</span>
+		</h1>
+
+		<h6 style="font-size: 13.5pt ; font-family: Nunito; font-weight: bold; color: black">3. People with sense of entitlement are able to build deeper relationships <input type="text" class="option" name="q3" id="tf3"></h6>
+		<h1 class="ml611">
+  		<span class="text-wrapper11">
+    	<span class="letters11" id="ans11" style="font-family: Nunito; color: green;"></span>
+  		</span>
+		</h1>
+
+		<h6 style="font-size: 13.5pt ; font-family: Nunito; font-weight: bold; color: black">4. People with sense of gratitude are more resilient <input type="text" class="option" name="q4" id="tf4"></h6>
+		<h1 class="ml612">
+  		<span class="text-wrapper12">
+    	<span class="letters12" id="ans12" style="font-family: Nunito; color: green;"></span>
+  		</span>
+		</h1>
+
+		<h6 style="font-size: 13.5pt ; font-family: Nunito; font-weight: bold; color: black">5. People with sense of gratitude are less materialistic <input type="text" class="option" name="q5" id="tf5"></h6>
+		<h1 class="ml613">
+  		<span class="text-wrapper13">
+    	<span class="letters13" id="ans13" style="font-family: Nunito; color: green;"></span>
+  		</span>
+		</h1>
+    <input style="font-size: 13.5pt ; font-family: Nunito;" type="button" name="submit" value="Submit" id="s1" onclick="submit()" class="btn btn-dark m-auto d-block">
+      </div>
+	</div>
+</body>
+</html>

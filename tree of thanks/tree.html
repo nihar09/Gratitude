@@ -1,0 +1,2365 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tree of Thanks</title>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,700,800,900&display=swap" rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous">
+    </script>
+
+<!-- Timer Part-->
+<script>
+    function getTimeRemaining(endtime) {
+        var t = Date.parse(endtime) - Date.parse(new Date());
+        var seconds = Math.floor((t / 1000) % 60);
+        var minutes = Math.floor((t / 1000 / 60) % 60);
+        var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+        var days = Math.floor(t / (1000 * 60 * 60 * 24));
+        return {
+            'total': t,
+            'days': days,
+            'hours': hours,
+            'minutes': minutes,
+            'seconds': seconds
+        };
+    }
+
+    function initializeClock(id, endtime) {
+    var clock = document.getElementById(id);
+    var minutesSpan = clock.querySelector('.minutes');
+    var secondsSpan = clock.querySelector('.seconds');
+
+    function updateClock() {
+        var t = getTimeRemaining(endtime);
+
+        minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+        secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
+        if($('.minutes').text() == '00' && $('.seconds').text() == '00')
+        {
+          document.getElementById("treeleaf").innerHTML = "";
+            document.getElementById("left").innerHTML = "";
+            document.getElementById("right").innerHTML = "";
+            document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+            document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+            document.getElementById("coins").hidden = false;
+            document.getElementById("drop").play();
+            document.getElementById("my_audio").pause();
+            document.getElementById("my_end").play();
+            delay(5000);
+            document.getElementById("my_end").pause();
+        }
+
+        if (t.total <= 0) {
+        clearInterval(timeinterval);
+        }
+    }
+
+    updateClock();
+    var timeinterval = setInterval(updateClock, 1000);
+    }
+
+    var deadline = new Date(Date.parse(new Date()) + 20 * 1000);
+    initializeClock('clockdiv', deadline);
+</script>
+<!------>
+
+<script type="text/javascript">
+  var score=0;
+  //Show answer button function
+  function ans1()
+  {
+    document.getElementById("greet1").innerHTML = "SUN";
+    document.getElementById("bs1").disabled = true;
+    document.getElementById('boxA').ondragstart = function () { return false; };
+  }
+
+  //Checking the correct answer
+  function check1()
+  {
+    if(((document.getElementById("s1").value == "u") || (document.getElementById("s1").value == "U")))
+    {
+      score++;
+      document.getElementById("scoring").innerHTML = "Your Score is " + score;
+      document.getElementById("boxA").draggable = true;
+      document.getElementById('boxA').ondragstart = function (ev) { ev.dataTransfer.effectAllowed='move';
+            ev.dataTransfer.setData("Text", ev.target.getAttribute('id'));
+            ev.dataTransfer.setDragImage(ev.target,0,0);
+            return true; };
+      document.getElementById("greet1").innerHTML = "Correct";
+      document.getElementById("bs1").disabled = true;
+      
+        
+        
+        if (score == 21) {
+          document.getElementById("treeleaf").innerHTML = "";
+            document.getElementById("left").innerHTML = "";
+            document.getElementById("right").innerHTML = "";
+          document.getElementById("congrats").innerHTML = "Congratulations You solved all the questions correct";
+            document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+
+          document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+            document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+            document.getElementById("coins").hidden = false;
+            document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+      
+        }
+    }
+    else
+    {
+      document.getElementById('boxA').ondragstart = function () { return false; };
+      var str = "<h3 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! Its incorrect. Try again!</h3>";
+        var res = str.fontcolor("red");
+        document.getElementById("greet1").innerHTML = res;
+    }
+  }
+
+  //Show answer button function
+  function ans2()
+  {
+    document.getElementById("greet2").innerHTML = "NATURE";
+    document.getElementById("ns1").disabled = true;
+    document.getElementById('boxB').ondragstart = function () { return false; };
+  }
+
+  //Checking the correct answer
+  function check2()
+  {
+    if(((document.getElementById("n1").value == "a") || (document.getElementById("n1").value == "A")) && ((document.getElementById("n2").value == "u") || (document.getElementById("n2").value == "U")) && ((document.getElementById("n3").value == "e") || (document.getElementById("n3").value == "E")))
+    {
+      score++;
+      document.getElementById("scoring").innerHTML = "Your Score is " + score;
+      document.getElementById("boxB").draggable = true;
+      document.getElementById('boxB').ondragstart = function (ev) { ev.dataTransfer.effectAllowed='move';
+            ev.dataTransfer.setData("Text", ev.target.getAttribute('id'));
+            ev.dataTransfer.setDragImage(ev.target,0,0);
+            return true; };
+      document.getElementById("greet2").innerHTML = "Correct";
+      document.getElementById("ns1").disabled = true;
+      
+        
+        
+        if (score == 21) {
+          document.getElementById("treeleaf").innerHTML = "";
+            document.getElementById("left").innerHTML = "";
+            document.getElementById("right").innerHTML = "";
+          document.getElementById("congrats").innerHTML = "Congratulations You solved all the questions correct";
+            document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+      
+          document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+            document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+            document.getElementById("coins").hidden = false;
+            document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+
+        }
+    }
+    else
+    {
+      document.getElementById('boxB').ondragstart = function () { return false; };
+      var str = "<h3 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! Its incorrect. Try again!</h3>";
+        var res = str.fontcolor("red");
+        document.getElementById("greet2").innerHTML = res;
+    }
+  }
+
+  //Show answer button function
+  function ans3()
+  {
+    document.getElementById("greet3").innerHTML = "GOD";
+    document.getElementById("gs1").disabled = true;
+    document.getElementById('boxC').ondragstart = function () { return false; };
+  }
+
+  //Checking the correct answer
+  function check3()
+  {
+    if((document.getElementById("g1").value == "o") || (document.getElementById("g1").value == "O"))
+    {
+      score++;
+      document.getElementById("scoring").innerHTML = "Your Score is " + score;
+      document.getElementById("boxC").draggable = true;
+      document.getElementById('boxC').ondragstart = function (ev) { ev.dataTransfer.effectAllowed='move';
+            ev.dataTransfer.setData("Text", ev.target.getAttribute('id'));
+            ev.dataTransfer.setDragImage(ev.target,0,0);
+            return true; };
+      document.getElementById("greet3").innerHTML = "Correct";
+      document.getElementById("gs1").disabled = true;
+      
+        
+        
+        if (score == 21) {
+          document.getElementById("treeleaf").innerHTML = "";
+            document.getElementById("left").innerHTML = "";
+            document.getElementById("right").innerHTML = "";
+          document.getElementById("congrats").innerHTML = "Congratulations You solved all the questions correct";
+            document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+      
+          document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+            document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+            document.getElementById("coins").hidden = false;
+            document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+
+        }
+    }
+    else
+    {
+      document.getElementById('boxC').ondragstart = function () { return false; };
+      var str = "<h3 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! Its incorrect. Try again!</h3>";
+        var res = str.fontcolor("red");
+        document.getElementById("greet3").innerHTML = res;
+    }
+  }
+
+  //Show answer button function
+  function ans4()
+  {
+    document.getElementById("greet4").innerHTML = "PARENTS";
+    document.getElementById("ps1").disabled = true;
+    document.getElementById('boxD').ondragstart = function () { return false; };
+  }
+
+  //Checking the correct answer
+  function check4()
+  {
+    if(((document.getElementById("p1").value == "p") || (document.getElementById("p1").value == "P")) && ((document.getElementById("p2").value == "r") || (document.getElementById("p2").value == "R")) && ((document.getElementById("p3").value == "n") || (document.getElementById("p3").value == "N")) && ((document.getElementById("p4").value == "s") || (document.getElementById("p4").value == "S")))
+    {
+      score++;
+      document.getElementById("scoring").innerHTML = "Your Score is " + score;
+      document.getElementById("boxD").draggable = true;
+      document.getElementById('boxD').ondragstart = function (ev) { ev.dataTransfer.effectAllowed='move';
+            ev.dataTransfer.setData("Text", ev.target.getAttribute('id'));
+            ev.dataTransfer.setDragImage(ev.target,0,0);
+            return true; };
+
+      document.getElementById("greet4").innerHTML = "Correct";
+      document.getElementById("ps1").disabled = true;
+      
+        
+        
+        if (score == 21) {
+          document.getElementById("treeleaf").innerHTML = "";
+            document.getElementById("left").innerHTML = "";
+            document.getElementById("right").innerHTML = "";
+          document.getElementById("congrats").innerHTML = "Congratulations You solved all the questions correct";
+            document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+      
+          document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+            document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+            document.getElementById("coins").hidden = false;
+            document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+
+        }
+    }
+    else
+    {
+      document.getElementById('boxD').ondragstart = function () { return false; };
+      var str = "<h3 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! Its incorrect. Try again!</h3>";
+        var res = str.fontcolor("red");
+        document.getElementById("greet4").innerHTML = res;
+    }
+  }
+
+  //Show answer button function
+  function ans5()
+  {
+    document.getElementById("greet5").innerHTML = "SCHOOL";
+    document.getElementById("scs1").disabled = true;
+    document.getElementById('boxE').ondragstart = function () { return false; };
+  }
+
+  //Checking the correct answer
+  function check5()
+  {
+    if(((document.getElementById("sc1").value == "c") || (document.getElementById("sc1").value == "C")) && ((document.getElementById("sc2").value == "o") || (document.getElementById("sc2").value == "O")) && ((document.getElementById("sc3").value == "l") || (document.getElementById("sc3").value == "L")))
+    {
+      score++;
+      document.getElementById("scoring").innerHTML = "Your Score is " + score;
+      document.getElementById("boxE").draggable = true;
+      document.getElementById('boxE').ondragstart = function (ev) { ev.dataTransfer.effectAllowed='move';
+            ev.dataTransfer.setData("Text", ev.target.getAttribute('id'));
+            ev.dataTransfer.setDragImage(ev.target,0,0);
+            return true; };
+      document.getElementById("greet5").innerHTML = "Correct";
+      document.getElementById("scs1").disabled = true;
+      
+        
+        
+        if (score == 21) {
+          document.getElementById("treeleaf").innerHTML = "";
+            document.getElementById("left").innerHTML = "";
+            document.getElementById("right").innerHTML = "";
+          document.getElementById("congrats").innerHTML = "Congratulations You solved all the questions correct";
+            document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+      
+          document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+            document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+            document.getElementById("coins").hidden = false;
+            document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+
+        }
+    }
+    else
+    {
+      document.getElementById('boxE').ondragstart = function () { return false; };
+      var str = "<h3 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! Its incorrect. Try again!</h3>";
+        var res = str.fontcolor("red");
+        document.getElementById("greet5").innerHTML = res;
+    }
+  }
+
+  //Show answer button function
+  function ans6()
+  {
+    document.getElementById("greet6").innerHTML = "TEACHERS";
+    document.getElementById("ts1").disabled = true;
+    document.getElementById('boxF').ondragstart = function () { return false; };
+  }
+
+  //Checking the correct answer
+  function check6()
+  {
+    if(((document.getElementById("t1").value == "e") || (document.getElementById("t1").value == "E")) && ((document.getElementById("t2").value == "c") || (document.getElementById("t2").value == "C")) && ((document.getElementById("t3").value == "e") || (document.getElementById("t3").value == "E")))
+    {
+      score++;
+      document.getElementById("scoring").innerHTML = "Your Score is " + score;
+      document.getElementById("boxF").draggable = true;
+      document.getElementById('boxF').ondragstart = function (ev) { ev.dataTransfer.effectAllowed='move';
+            ev.dataTransfer.setData("Text", ev.target.getAttribute('id'));
+            ev.dataTransfer.setDragImage(ev.target,0,0);
+            return true; };
+      document.getElementById("greet6").innerHTML = "Correct";
+      document.getElementById("ts1").disabled = true;
+      
+        
+        
+        if (score == 21) {
+          document.getElementById("treeleaf").innerHTML = "";
+            document.getElementById("left").innerHTML = "";
+            document.getElementById("right").innerHTML = "";
+          document.getElementById("congrats").innerHTML = "Congratulations You solved all the questions correct";
+            document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+     
+          document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+            document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+            document.getElementById("coins").hidden = false;
+            document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+
+        }
+    }
+    else
+    {
+      document.getElementById('boxF').ondragstart = function () { return false; };
+      var str = "<h3 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! Its incorrect. Try again!</h3>";
+        var res = str.fontcolor("red");
+        document.getElementById("greet6").innerHTML = res;
+    }
+  }
+
+  //Show answer button function
+  function ans7()
+  {
+    document.getElementById("greet7").innerHTML = "SIBLINGS";
+    document.getElementById("sis1").disabled = true;
+    document.getElementById('boxG').ondragstart = function () { return false; };
+  }
+
+  //Checking the correct answer
+  function check7()
+  {
+    if(((document.getElementById("si1").value == "b") || (document.getElementById("si1").value == "B")) && ((document.getElementById("si2").value == "i") || (document.getElementById("si2").value == "I")) && ((document.getElementById("si3").value == "s") || (document.getElementById("si3").value == "S")))
+    {
+      score++;
+      document.getElementById("scoring").innerHTML = "Your Score is " + score;
+      document.getElementById("boxG").draggable = true;
+      document.getElementById('boxG').ondragstart = function (ev) { ev.dataTransfer.effectAllowed='move';
+            ev.dataTransfer.setData("Text", ev.target.getAttribute('id'));
+            ev.dataTransfer.setDragImage(ev.target,0,0);
+            return true; };
+      document.getElementById("greet7").innerHTML = "Correct";
+      document.getElementById("sis1").disabled = true;
+      
+        
+        
+        if (score == 21) {
+          document.getElementById("treeleaf").innerHTML = "";
+            document.getElementById("left").innerHTML = "";
+            document.getElementById("right").innerHTML = "";
+          document.getElementById("congrats").innerHTML = "Congratulations You solved all the questions correct";
+            document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+      
+          document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+            document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+            document.getElementById("coins").hidden = false;
+            document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+
+        }
+    }
+    else
+    {
+      document.getElementById('boxG').ondragstart = function () { return false; };
+      var str = "<h3 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! Its incorrect. Try again!</h3>";
+        var res = str.fontcolor("red");
+        document.getElementById("greet7").innerHTML = res;
+    }
+  }
+
+  //Show answer button function
+  function ans8()
+  {
+    document.getElementById("greet8").innerHTML = "FRIENDS";
+    document.getElementById("fs1").disabled = true;
+    document.getElementById('boxH').ondragstart = function () { return false; };
+  }
+
+  //Checking the correct answer
+  function check8()
+  {
+    if(((document.getElementById("f1").value == "i") || (document.getElementById("f1").value == "I")) && ((document.getElementById("f2").value == "n") || (document.getElementById("f2").value == "N")) && ((document.getElementById("f3").value == "s") || (document.getElementById("f3").value == "S")))
+    {
+      score++;
+      document.getElementById("scoring").innerHTML = "Your Score is " + score;
+      document.getElementById("boxH").draggable = true;
+      document.getElementById('boxH').ondragstart = function (ev) { ev.dataTransfer.effectAllowed='move';
+            ev.dataTransfer.setData("Text", ev.target.getAttribute('id'));
+            ev.dataTransfer.setDragImage(ev.target,0,0);
+            return true; };
+      document.getElementById("greet8").innerHTML = "Correct";
+      document.getElementById("fs1").disabled = true;
+      
+        
+        
+        if (score == 21) {
+          document.getElementById("treeleaf").innerHTML = "";
+            document.getElementById("left").innerHTML = "";
+            document.getElementById("right").innerHTML = "";
+          document.getElementById("congrats").innerHTML = "Congratulations You solved all the questions correct";
+            document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+      
+          document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+            document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+            document.getElementById("coins").hidden = false;
+            document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+
+        }
+    }
+    else
+    {
+      document.getElementById('boxH').ondragstart = function () { return false; };
+      var str = "<h3 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! Its incorrect. Try again!</h3>";
+        var res = str.fontcolor("red");
+        document.getElementById("greet8").innerHTML = res;
+    }
+  }
+
+  //Show answer button function
+  function ans9()
+  {
+    document.getElementById("greet9").innerHTML = "FAMILY";
+    document.getElementById("fas1").disabled = true;
+    document.getElementById('boxI').ondragstart = function () { return false; };
+  }
+
+  //Checking the correct answer
+  function check9()
+  {
+    if(((document.getElementById("fa1").value == "a") || (document.getElementById("fa1").value == "A")) && ((document.getElementById("fa2").value == "i") || (document.getElementById("fa2").value == "I")) && ((document.getElementById("fa3").value == "y") || (document.getElementById("fa3").value == "Y")))
+    {
+      score++;
+      document.getElementById("scoring").innerHTML = "Your Score is " + score;
+      document.getElementById("boxI").draggable = true;
+      document.getElementById('boxI').ondragstart = function (ev) { ev.dataTransfer.effectAllowed='move';
+            ev.dataTransfer.setData("Text", ev.target.getAttribute('id'));
+            ev.dataTransfer.setDragImage(ev.target,0,0);
+            return true; };
+      document.getElementById("greet9").innerHTML = "Correct";
+      
+        
+        
+        if (score == 21) {
+          document.getElementById("treeleaf").innerHTML = "";
+            document.getElementById("left").innerHTML = "";
+            document.getElementById("right").innerHTML = "";
+          document.getElementById("congrats").innerHTML = "Congratulations You solved all the questions correct";
+            document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+     
+          document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+            document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+            document.getElementById("coins").hidden = false;
+            document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+
+        }
+    }
+    else
+    {
+      document.getElementById('boxI').ondragstart = function () { return false; };
+      var str = "<h3 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! Its incorrect. Try again!</h3>";
+        var res = str.fontcolor("red");
+        document.getElementById("greet9").innerHTML = res;
+    }
+  }
+
+  //Show answer button function
+  function ans10()
+  {
+    document.getElementById("greet10").innerHTML = "TECHNOLOGY";
+    document.getElementById("tes1").disabled = true;
+    document.getElementById('boxJ').ondragstart = function () { return false; };
+  }
+
+  //Checking the correct answer
+  function check10()
+  {
+    if(((document.getElementById("te1").value == "e") || (document.getElementById("te1").value == "E")) && ((document.getElementById("te2").value == "n") || (document.getElementById("te2").value == "N")) && ((document.getElementById("te3").value == "o") || (document.getElementById("te3").value == "O")))
+    {
+      score++;
+      document.getElementById("scoring").innerHTML = "Your Score is " + score;
+      document.getElementById("boxJ").draggable = true;
+      document.getElementById('boxJ').ondragstart = function (ev) { ev.dataTransfer.effectAllowed='move';
+            ev.dataTransfer.setData("Text", ev.target.getAttribute('id'));
+            ev.dataTransfer.setDragImage(ev.target,0,0);
+            return true; };
+      document.getElementById("greet10").innerHTML = "Correct";
+      document.getElementById("tes1").disabled = true;
+      
+        
+        
+        if (score == 21) {
+          document.getElementById("treeleaf").innerHTML = "";
+            document.getElementById("left").innerHTML = "";
+            document.getElementById("right").innerHTML = "";
+          document.getElementById("congrats").innerHTML = "Congratulations You solved all the questions correct";
+            document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+      
+          document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+            document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+            document.getElementById("coins").hidden = false;
+            document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+
+        }
+    }
+    else
+    {
+      document.getElementById('boxJ').ondragstart = function () { return false; };
+      var str = "<h3 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! Its incorrect. Try again!</h3>";
+        var res = str.fontcolor("red");
+        document.getElementById("greet10").innerHTML = res;
+    }
+  }
+
+  //Show answer button function
+  function ans11()
+  {
+    document.getElementById("greet11").innerHTML = "GIFTS";
+    document.getElementById("gis1").disabled = true;
+    document.getElementById('boxK').ondragstart = function () { return false; };
+  }
+
+  //Checking the correct answer
+  function check11()
+  {
+    if(((document.getElementById("gi1").value == "f") || (document.getElementById("gi1").value == "F")) && ((document.getElementById("gi2").value == "s") || (document.getElementById("gi2").value == "S")))
+    {
+      score++;
+      document.getElementById("scoring").innerHTML = "Your Score is " + score;
+      document.getElementById("boxK").draggable = true;
+      document.getElementById('boxK').ondragstart = function (ev) { ev.dataTransfer.effectAllowed='move';
+            ev.dataTransfer.setData("Text", ev.target.getAttribute('id'));
+            ev.dataTransfer.setDragImage(ev.target,0,0);
+            return true; };
+      document.getElementById("greet11").innerHTML = "Correct";
+      document.getElementById("gis1").disabled = true;
+      
+        
+        
+        if (score == 21) {
+          document.getElementById("treeleaf").innerHTML = "";
+            document.getElementById("left").innerHTML = "";
+            document.getElementById("right").innerHTML = "";
+          document.getElementById("congrats").innerHTML = "Congratulations You solved all the questions correct";
+            document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+      
+          document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+            document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+            document.getElementById("coins").hidden = false;
+            document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+
+        }
+    }
+    else
+    {
+      document.getElementById('boxK').ondragstart = function () { return false; };
+      var str = "<h3 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! Its incorrect. Try again!</h3>";
+        var res = str.fontcolor("red");
+        document.getElementById("greet11").innerHTML = res;
+    }
+  }
+
+  //Show answer button function
+  function ans12()
+  {
+    document.getElementById("greet12").innerHTML = "TRANSPORTATION";
+    document.getElementById("trs1").disabled = true;
+    document.getElementById('boxL').ondragstart = function () { return false; };
+  }
+
+  //Checking the correct answer
+  function check12()
+  {
+    if(((document.getElementById("tr1").value == "t") || (document.getElementById("tr1").value == "T")) && ((document.getElementById("tr2").value == "a") || (document.getElementById("tr2").value == "A")) && ((document.getElementById("tr3").value == "s") || (document.getElementById("tr3").value == "S")) && ((document.getElementById("tr4").value == "o") || (document.getElementById("tr4").value == "O")) && ((document.getElementById("tr5").value == "t") || (document.getElementById("tr5").value == "T")) && ((document.getElementById("tr6").value == "n") || (document.getElementById("tr6").value == "N")))
+    {
+      score++;
+      document.getElementById("scoring").innerHTML = "Your Score is " + score;
+      document.getElementById("boxL").draggable = true;
+      document.getElementById('boxL').ondragstart = function (ev) { ev.dataTransfer.effectAllowed='move';
+            ev.dataTransfer.setData("Text", ev.target.getAttribute('id'));
+            ev.dataTransfer.setDragImage(ev.target,0,0);
+            return true; };
+      document.getElementById("greet12").innerHTML = "Correct";
+      document.getElementById("trs1").disabled = true;
+      
+        
+        
+        if (score == 21) {
+          document.getElementById("treeleaf").innerHTML = "";
+            document.getElementById("left").innerHTML = "";
+            document.getElementById("right").innerHTML = "";
+          document.getElementById("congrats").innerHTML = "Congratulations You solved all the questions correct";
+            document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+      
+          document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+            document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+            document.getElementById("coins").hidden = false;
+            document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+
+        }
+    }
+    else
+    {
+      document.getElementById('boxL').ondragstart = function () { return false; };
+      var str = "<h3 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! Its incorrect. Try again!</h3>";
+        var res = str.fontcolor("red");
+        document.getElementById("greet12").innerHTML = res;
+    }
+  }
+
+  //Show answer button function
+  function ans13()
+  {
+    document.getElementById("greet13").innerHTML = "FOOD";
+    document.getElementById("fos1").disabled = true;
+    document.getElementById('boxM').ondragstart = function () { return false; };
+  }
+
+  //Checking the correct answer
+  function check13()
+  {
+    if(((document.getElementById("fo1").value == "f") || (document.getElementById("fo1").value == "F")) && ((document.getElementById("fo2").value == "o") || (document.getElementById("fo2").value == "O")))
+    {
+      score++;
+      document.getElementById("scoring").innerHTML = "Your Score is " + score;
+      document.getElementById("boxM").draggable = true;
+      document.getElementById('boxM').ondragstart = function (ev) { ev.dataTransfer.effectAllowed='move';
+            ev.dataTransfer.setData("Text", ev.target.getAttribute('id'));
+            ev.dataTransfer.setDragImage(ev.target,0,0);
+            return true; };
+      document.getElementById("greet13").innerHTML = "Correct";
+      document.getElementById("fos1").disabled = true;
+      
+        
+        
+        if (score == 21) {
+          document.getElementById("treeleaf").innerHTML = "";
+            document.getElementById("left").innerHTML = "";
+            document.getElementById("right").innerHTML = "";
+          document.getElementById("congrats").innerHTML = "Congratulations You solved all the questions correct";
+            document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+      
+          document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+            document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+            document.getElementById("coins").hidden = false;
+            document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+        }
+    }
+    else
+    {
+      document.getElementById('boxM').ondragstart = function () { return false; };
+      var str = "<h3 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! Its incorrect. Try again!</h3>";
+        var res = str.fontcolor("red");
+        document.getElementById("greet13").innerHTML = res;
+    }
+  }
+
+  //Show answer button function
+  function ans14()
+  {
+    document.getElementById("greet14").innerHTML = "CLOTHES";
+    document.getElementById("cs1").disabled = true;
+    document.getElementById('boxN').ondragstart = function () { return false; };
+  }
+
+  //Checking the correct answer
+  function check14()
+  {
+    if(((document.getElementById("c1").value == "o") || (document.getElementById("c1").value == "O")) && ((document.getElementById("c2").value == "h") || (document.getElementById("c2").value == "H")) && ((document.getElementById("c3").value == "s") || (document.getElementById("c3").value == "S")))
+    {
+      score++;
+      document.getElementById("scoring").innerHTML = "Your Score is " + score;
+      document.getElementById("boxN").draggable = true;
+      document.getElementById('boxN').ondragstart = function (ev) { ev.dataTransfer.effectAllowed='move';
+            ev.dataTransfer.setData("Text", ev.target.getAttribute('id'));
+            ev.dataTransfer.setDragImage(ev.target,0,0);
+            return true; };
+      document.getElementById("greet14").innerHTML = "Correct";
+      document.getElementById("cs1").disabled = true;
+      
+        
+        
+        if (score == 21) {
+          document.getElementById("treeleaf").innerHTML = "";
+            document.getElementById("left").innerHTML = "";
+            document.getElementById("right").innerHTML = "";
+          document.getElementById("congrats").innerHTML = "Congratulations You solved all the questions correct";
+            document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+      
+          document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+            document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+            document.getElementById("coins").hidden = false;
+            document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+
+        }
+    }
+    else
+    {
+      document.getElementById('boxN').ondragstart = function () { return false; };
+      var str = "<h3 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! Its incorrect. Try again!</h3>";
+        var res = str.fontcolor("red");
+        document.getElementById("greet14").innerHTML = res;
+    }
+  }
+
+  //Show answer button function
+  function ans15()
+  {
+    document.getElementById("greet15").innerHTML = "HOME";
+    document.getElementById("hs1").disabled = true;
+    document.getElementById('boxO').ondragstart = function () { return false; };
+  }
+
+  //Checking the correct answer
+  function check15()
+  {
+    if(((document.getElementById("h1").value == "h") || (document.getElementById("h1").value == "H")) && ((document.getElementById("h2").value == "m") || (document.getElementById("h2").value == "M")))
+    {
+      score++;
+      document.getElementById("scoring").innerHTML = "Your Score is " + score;
+      document.getElementById("boxO").draggable = true;
+      document.getElementById('boxO').ondragstart = function (ev) { ev.dataTransfer.effectAllowed='move';
+            ev.dataTransfer.setData("Text", ev.target.getAttribute('id'));
+            ev.dataTransfer.setDragImage(ev.target,0,0);
+            return true; };
+      document.getElementById("greet15").innerHTML = "Correct";
+      document.getElementById("hs1").disabled = true;
+      
+        
+        
+        if (score == 21) {
+          document.getElementById("treeleaf").innerHTML = "";
+            document.getElementById("left").innerHTML = "";
+            document.getElementById("right").innerHTML = "";
+          document.getElementById("congrats").innerHTML = "Congratulations You solved all the questions correct";
+            document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+      
+          document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+            document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+            document.getElementById("coins").hidden = false;
+            document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+
+        }
+    }
+    else
+    {
+      document.getElementById('boxO').ondragstart = function () { return false; };
+      var str = "<h3 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! Its incorrect. Try again!</h3>";
+        var res = str.fontcolor("red");
+        document.getElementById("greet15").innerHTML = res;
+    }
+  }
+
+  //Show answer button function
+  function ans16()
+  {
+    document.getElementById("greet16").innerHTML = "WATER";
+    document.getElementById("ws1").disabled = true;
+    document.getElementById('boxP').ondragstart = function () { return false; };
+  }
+
+  //Checking the correct answer
+  function check16()
+  {
+    if(((document.getElementById("w1").value == "w") || (document.getElementById("w1").value == "W")) && ((document.getElementById("w2").value == "t") || (document.getElementById("w2").value == "T")) && ((document.getElementById("w3").value == "r") || (document.getElementById("w3").value == "R")))
+    {
+      score++;
+      document.getElementById("scoring").innerHTML = "Your Score is " + score;
+      document.getElementById("boxP").draggable = true;
+      document.getElementById('boxP').ondragstart = function (ev) { ev.dataTransfer.effectAllowed='move';
+            ev.dataTransfer.setData("Text", ev.target.getAttribute('id'));
+            ev.dataTransfer.setDragImage(ev.target,0,0);
+            return true; };
+      document.getElementById("greet16").innerHTML = "Correct";
+      document.getElementById("ws1").disabled = true;
+      
+        
+        
+        if (score == 21) {
+          document.getElementById("treeleaf").innerHTML = "";
+            document.getElementById("left").innerHTML = "";
+            document.getElementById("right").innerHTML = "";
+          document.getElementById("congrats").innerHTML = "Congratulations You solved all the questions correct";
+            document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+      
+          document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+            document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+            document.getElementById("coins").hidden = false;
+            document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+
+        }
+    }
+    else
+    {
+      document.getElementById('boxP').ondragstart = function () { return false; };
+      var str = "<h3 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! Its incorrect. Try again!</h3>";
+        var res = str.fontcolor("red");
+        document.getElementById("greet16").innerHTML = res;
+    }
+  }
+
+  //Show answer button function
+  function ans17()
+  {
+    document.getElementById("greet17").innerHTML = "SCIENCE";
+    document.getElementById("scis1").disabled = true;
+    document.getElementById('boxQ').ondragstart = function () { return false; };
+  }
+
+  //Checking the correct answer
+  function check17()
+  {
+    if(((document.getElementById("sci1").value == "c") || (document.getElementById("sci1").value == "C")) && ((document.getElementById("sci2").value == "e") || (document.getElementById("sci2").value == "E")) && ((document.getElementById("sci3").value == "c") || (document.getElementById("sci3").value == "C")))
+    {
+      score++;
+      document.getElementById("scoring").innerHTML = "Your Score is " + score;
+      document.getElementById("boxQ").draggable = true;
+      document.getElementById('boxQ').ondragstart = function (ev) { ev.dataTransfer.effectAllowed='move';
+            ev.dataTransfer.setData("Text", ev.target.getAttribute('id'));
+            ev.dataTransfer.setDragImage(ev.target,0,0);
+            return true; };
+      document.getElementById("greet17").innerHTML = "Correct";
+      document.getElementById("scis1").disabled = true;
+      
+        
+        
+        if (score == 21) {
+          document.getElementById("treeleaf").innerHTML = "";
+            document.getElementById("left").innerHTML = "";
+            document.getElementById("right").innerHTML = "";
+          document.getElementById("congrats").innerHTML = "Congratulations You solved all the questions correct";
+            document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+      
+          document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+            document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+            document.getElementById("coins").hidden = false;
+            document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+
+        }
+    }
+    else
+    {
+      document.getElementById('boxQ').ondragstart = function () { return false; };
+      var str = "<h3 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! Its incorrect. Try again!</h3>";
+        var res = str.fontcolor("red");
+        document.getElementById("greet17").innerHTML = res;
+    }
+  }
+
+  //Show answer button function
+  function ans18()
+  {
+    document.getElementById("greet18").innerHTML = "RAIN";
+    document.getElementById("rs1").disabled = true;
+    document.getElementById('boxR').ondragstart = function () { return false; };
+  }
+
+  //Checking the correct answer
+  function check18()
+  {
+    if(((document.getElementById("r1").value == "a") || (document.getElementById("r1").value == "A")) && ((document.getElementById("r2").value == "n") || (document.getElementById("r2").value == "N")))
+    {
+      score++;
+      document.getElementById("scoring").innerHTML = "Your Score is " + score;
+      document.getElementById("boxR").draggable = true;
+      document.getElementById('boxR').ondragstart = function (ev) { ev.dataTransfer.effectAllowed='move';
+            ev.dataTransfer.setData("Text", ev.target.getAttribute('id'));
+            ev.dataTransfer.setDragImage(ev.target,0,0);
+            return true; };
+      document.getElementById("greet18").innerHTML = "Correct";
+      document.getElementById("rs1").disabled = true;
+      
+        
+        
+        if (score == 21) {
+          document.getElementById("treeleaf").innerHTML = "";
+            document.getElementById("left").innerHTML = "";
+            document.getElementById("right").innerHTML = "";
+          document.getElementById("congrats").innerHTML = "Congratulations You solved all the questions correct";
+            document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+      
+          document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+            document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+            document.getElementById("coins").hidden = false;
+            document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+
+        }
+    }
+    else
+    {
+      document.getElementById('boxR').ondragstart = function () { return false; };
+      var str = "<h3 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! Its incorrect. Try again!</h3>";
+        var res = str.fontcolor("red");
+        document.getElementById("greet18").innerHTML = res;
+    }
+  }
+
+  //Show answer button function
+  function ans19()
+  {
+    document.getElementById("greet19").innerHTML = "STARS";
+    document.getElementById("sts1").disabled = true;
+    document.getElementById('boxS').ondragstart = function () { return false; };
+  }
+
+  //Checking the correct answer
+  function check19()
+  {
+    if(((document.getElementById("st1").value == "t") || (document.getElementById("st1").value == "T")) && ((document.getElementById("st2").value == "r") || (document.getElementById("st2").value == "R")))
+    {
+      score++;
+      document.getElementById("scoring").innerHTML = "Your Score is " + score;
+      document.getElementById("boxS").draggable = true;
+      document.getElementById('boxS').ondragstart = function (ev) { ev.dataTransfer.effectAllowed='move';
+            ev.dataTransfer.setData("Text", ev.target.getAttribute('id'));
+            ev.dataTransfer.setDragImage(ev.target,0,0);
+            return true; };
+      document.getElementById("greet19").innerHTML = "Correct";
+      document.getElementById("sts1").disabled = true;
+      
+        
+        
+        if (score == 21) {
+          document.getElementById("treeleaf").innerHTML = "";
+            document.getElementById("left").innerHTML = "";
+            document.getElementById("right").innerHTML = "";
+          document.getElementById("congrats").innerHTML = "Congratulations You solved all the questions correct";
+            document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+      
+          document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+            document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+            document.getElementById("coins").hidden = false;
+            document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+
+        }
+    }
+    else
+    {
+      document.getElementById('boxS').ondragstart = function () { return false; };
+      var str = "<h3 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! Its incorrect. Try again!</h3>";
+        var res = str.fontcolor("red");
+        document.getElementById("greet19").innerHTML = res;
+    }
+  }
+
+  //Show answer button function
+  function ans20()
+  {
+    document.getElementById("greet20").innerHTML = "HOLIDAYS";
+    document.getElementById("hos1").disabled = true;
+    document.getElementById('boxT').ondragstart = function () { return false; };
+  }
+
+  //Checking the correct answer
+  function check20()
+  {
+    if(((document.getElementById("ho1").value == "o") || (document.getElementById("ho1").value == "O")) && ((document.getElementById("ho2").value == "i") || (document.getElementById("ho2").value == "I")) && ((document.getElementById("ho3").value == "a") || (document.getElementById("ho3").value == "A")) && ((document.getElementById("ho4").value == "s") || (document.getElementById("ho4").value == "S")))
+    {
+      score++;
+      document.getElementById("scoring").innerHTML = "Your Score is " + score;
+      document.getElementById("boxT").draggable = true;
+      document.getElementById('boxT').ondragstart = function (ev) { ev.dataTransfer.effectAllowed='move';
+            ev.dataTransfer.setData("Text", ev.target.getAttribute('id'));
+            ev.dataTransfer.setDragImage(ev.target,0,0);
+            return true; };
+      document.getElementById("greet20").innerHTML = "Correct";
+      document.getElementById("hos1").disabled = true;
+      
+        
+        
+        if (score == 21) {
+          document.getElementById("treeleaf").innerHTML = "";
+            document.getElementById("left").innerHTML = "";
+            document.getElementById("right").innerHTML = "";
+          document.getElementById("congrats").innerHTML = "Congratulations You solved all the questions correct";
+            document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+      
+          document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+            document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+            document.getElementById("coins").hidden = false;
+            document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+
+        }
+    }
+    else
+    {
+      document.getElementById('boxT').ondragstart = function () { return false; };
+      var str = "<h3 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! Its incorrect. Try again!</h3>";
+        var res = str.fontcolor("red");
+        document.getElementById("greet20").innerHTML = res;
+    }
+  }
+
+  //Show answer button function
+  function ans21()
+  {
+    document.getElementById("greet21").innerHTML = "CLEANERS";
+    document.getElementById("cls1").disabled = true;
+    document.getElementById('boxU').ondragstart = function () { return false; };
+  }
+
+  //Checking the correct answer
+  function check21()
+  {
+    if(((document.getElementById("cl1").value == "l") || (document.getElementById("cl1").value == "L")) && ((document.getElementById("cl2").value == "n") || (document.getElementById("cl2").value == "N")) && ((document.getElementById("cl3").value == "s") || (document.getElementById("cl3").value == "S")))
+    {
+      score++;
+      document.getElementById("scoring").innerHTML = "Your Score is " + score;
+      document.getElementById("boxU").draggable = true;
+      document.getElementById('boxU').ondragstart = function (ev) { ev.dataTransfer.effectAllowed='move';
+            ev.dataTransfer.setData("Text", ev.target.getAttribute('id'));
+            ev.dataTransfer.setDragImage(ev.target,0,0);
+            return true; };
+      document.getElementById("greet21").innerHTML = "Correct";
+      document.getElementById("cls1").disabled = true;
+      
+        
+        
+        if (score == 21) {
+          document.getElementById("treeleaf").innerHTML = "";
+            document.getElementById("left").innerHTML = "";
+            document.getElementById("right").innerHTML = "";
+          document.getElementById("congrats").innerHTML = "Congratulations You solved all the questions correct";
+            document.getElementById("part1").hidden = false;
+            document.getElementById("goodjob").hidden = false;
+            document.getElementById("part2").hidden = false;
+      
+          document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+            document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+            document.getElementById("coins").hidden = false;
+            document.getElementById("my_audio").pause();
+      setTimeout(function(){ 
+      document.getElementById("drop").play(); 
+      }, 1000)
+          }
+      }
+      else
+      {
+        document.getElementById('boxU').ondragstart = function () { return false; };
+        var str = "<h3 style='font-size: 12pt; font-weight: bold; font-family: Nunito;'>Oops! Its incorrect. Try again!</h3>";
+        var res = str.fontcolor("red");
+        document.getElementById("greet21").innerHTML = res;
+      }
+  }
+
+//Displaying the corresponding images when hint button is pressed
+  function displaysun()
+  {
+    document.getElementById("img1").innerHTML = "<img src ='sun.jpg' width = '170px' height = '120px'>";
+  }
+  function displaynature()
+  {
+    document.getElementById("img2").innerHTML = "<img src = 'nature.jpeg' width = '170px' height = '120px'>";
+  }
+  function displaygod()
+  {
+    document.getElementById("img3").innerHTML = "<img src = 'god.jpg' width = '170px' height = '120px'>";
+  }
+  function displayparents()
+  {
+    document.getElementById("img4").innerHTML = "<img src = 'parents.jpg' width = '170px' height = '120px'>";
+  }
+  function displayschool()
+  {
+    document.getElementById("img5").innerHTML = "<img src = 'school.jpg' width = '170px' height = '120px'>";
+  }
+  function displayteachers()
+  {
+    document.getElementById("img6").innerHTML = "<img src = 'teacher.jpg' width = '170px' height = '120px'>";
+  }
+  function displaysiblings()
+  {
+    document.getElementById("img7").innerHTML = "<img src = 'siblings.jpg' width = '170px' height = '120px'>";
+  }
+  function displayfriends()
+  {
+    document.getElementById("img8").innerHTML = "<img src = 'friends.jpg' width = '170px' height = '120px'>";
+  }
+  function displayfamily()
+  {
+    document.getElementById("img9").innerHTML = "<img src = 'family.jpg' width = '170px' height = '120px'>";
+  }
+  function displaytechnology()
+  {
+    document.getElementById("img10").innerHTML = "<img src = 'technology.png' width = '170px' height = '120px'>";
+  }
+  function displaygifts()
+  {
+    document.getElementById("img11").innerHTML = "<img src = 'gift.jpeg' width = '170px' height = '120px'>";
+  }
+  function displaytransportation()
+  {
+    document.getElementById("img12").innerHTML = "<img src = 'transportation.jpg' width = '170px' height = '120px'>";
+  }
+  function displayfood()
+  {
+    document.getElementById("img13").innerHTML = "<img src = 'food.jpg' width = '170px' height = '120px'>";
+  }
+  function displayclothes()
+  {
+    document.getElementById("img14").innerHTML = "<img src = 'clothes.png' width = '170px' height = '120px'>";
+  }
+  function displayhome()
+  {
+    document.getElementById("img15").innerHTML = "<img src = 'home.jpg' width = '170px' height = '120px'>";
+  }
+  function displaywater()
+  {
+    document.getElementById("img16").innerHTML = "<img src = 'water.jpg' width = '170px' height = '120px'>";
+  }
+  function displayscience()
+  {
+    document.getElementById("img17").innerHTML = "<img src = 'science.jpg' width = '170px' height = '120px'>";
+  }
+  function displayrain()
+  {
+    document.getElementById("img18").innerHTML = "<img src = 'rain.jpg' width = '170px' height = '120px'>";
+  }
+  function displaystars()
+  {
+    document.getElementById("img19").innerHTML = "<img src = 'stars.png' width = '170px' height = '120px'>";
+  }
+  function displayholidays()
+  {
+    document.getElementById("img20").innerHTML = "<img src = 'holidays.jpg' width = '170px' height = '120px'>";
+  }
+  function displaycleaners()
+  {
+    document.getElementById("img21").innerHTML = "<img src = 'cleaners.jpg' width = '170px' height = '120px'>";
+  }
+</script>
+
+<!--Drag and drop events-->
+<script>
+function dragStart(ev) {
+            ev.dataTransfer.effectAllowed='move';
+            ev.dataTransfer.setData("Text", ev.target.getAttribute('id'));
+            ev.dataTransfer.setDragImage(ev.target,0,0);
+            return true;
+         }
+         function dragEnter(ev) {
+            event.preventDefault();
+            return true;
+         }
+         function dragOver(ev) {
+            return false;
+         }
+         function dragDrop(ev) {
+            var src = ev.dataTransfer.getData("Text");
+            ev.target.appendChild(document.getElementById(src));
+            ev.stopPropagation();
+            return false;
+         }
+</script>
+<!-------->
+
+
+<style type="text/css">
+  body{
+    background-color: #FFF5FD;
+  }
+
+/*Drop boxes present inside the tree*/ 
+  .leaf1 {
+    position: fixed;
+  width: 150px;
+  height: 600px;
+  margin-top: 100px;
+  left: 230px;
+  padding: 10px;
+  border: 0px solid #aaaaaa;
+}
+
+.leaf2 {
+  position: fixed;
+  width: 150px;
+  height: 600px;
+  margin-top: 100px;
+  left: 400px;
+  padding: 10px;
+  border: 0px solid #aaaaaa;
+}
+
+.leaf3 {
+  position: fixed;
+  width: 150px;
+  height: 600px;
+  margin-top: 100px;
+  left: 570px;
+  padding: 10px;
+  border: 0px solid #aaaaaa;
+}
+
+.leaf4 {
+  position: fixed;
+  width: 150px;
+  height: 600px;
+  margin-top: 100px;
+  left: 740px;
+  padding: 10px;
+  border: 0px solid #aaaaaa;
+}
+
+.leaf5 {
+  position: fixed;
+  width: 150px;
+  height: 600px;
+  margin-top: 100px;
+  left: 910px;
+  padding: 10px;
+  border: 0px solid #aaaaaa;
+}
+/*********************/
+
+.button {
+  /*background-color: #FFFF00; 
+  border: 2px solid #808080;*/
+  color: white;
+  padding: 15px 28px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 35px;
+  font-size: 12px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; 
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button12 {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+  margin: 4px 2px;
+  border-radius: 20px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+/*Hint button styling*/
+.button1:hover {
+  background-color: #f5f28e; 
+  color: black; 
+  border: 1px solid black;
+}
+
+.button1 {
+  background-color: #f5f28e;
+  color: white;
+
+}
+
+.button1:active {
+  background-color: #5562eb;
+}
+/******************/
+
+/*Submit and Show answer button styling*/
+.button2 {
+  background-color: #f74d67;
+  color: black;
+  border: 2px solid #f74d67;
+}
+
+.button2:hover {
+  background-color: #f74d67;
+  color: white;
+}
+
+.button2:active {
+  background-color: #5562eb;
+  border: 2px solid #5562eb;
+}
+/********************/
+
+  .ml71 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.7em;
+}
+.ml71 .text-wrapper1 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+.ml71 .letter1 {
+  transform-origin: 0 100%;
+  display: inline-block;
+  line-height: 1em;
+}
+
+.ml72 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.7em;
+}
+.ml72 .text-wrapper2 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+.ml72 .letter2 {
+  transform-origin: 0 100%;
+  display: inline-block;
+  line-height: 1em;
+}
+
+.ml73 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.7em;
+}
+.ml73 .text-wrapper3 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+.ml73 .letter3 {
+  transform-origin: 0 100%;
+  display: inline-block;
+  line-height: 1em;
+}
+
+.ml74 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.7em;
+}
+.ml74 .text-wrapper4 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+.ml74 .letter4 {
+  transform-origin: 0 100%;
+  display: inline-block;
+  line-height: 1em;
+}
+
+.ml75 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.7em;
+}
+.ml75 .text-wrapper5 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+.ml75 .letter5 {
+  transform-origin: 0 100%;
+  display: inline-block;
+  line-height: 1em;
+}
+
+.ml76 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.7em;
+}
+.ml76 .text-wrapper6 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+.ml76 .letter6 {
+  transform-origin: 0 100%;
+  display: inline-block;
+  line-height: 1em;
+}
+
+.ml77 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.7em;
+}
+.ml77 .text-wrapper7 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+.ml77 .letter7 {
+  transform-origin: 0 100%;
+  display: inline-block;
+  line-height: 1em;
+}
+
+.ml78 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.7em;
+}
+.ml78 .text-wrapper8 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+.ml78 .letter8 {
+  transform-origin: 0 100%;
+  display: inline-block;
+  line-height: 1em;
+}
+
+.ml79 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.7em;
+}
+.ml79 .text-wrapper9 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+.ml79 .letter9 {
+  transform-origin: 0 100%;
+  display: inline-block;
+  line-height: 1em;
+}
+
+.ml710 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.7em;
+}
+.ml710 .text-wrapper10 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+.ml710 .letter10 {
+  transform-origin: 0 100%;
+  display: inline-block;
+  line-height: 1em;
+}
+
+.ml711 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.7em;
+}
+.ml711 .text-wrapper11 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+.ml711 .letter11 {
+  transform-origin: 0 100%;
+  display: inline-block;
+  line-height: 1em;
+}
+
+.ml712 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.7em;
+}
+.ml712 .text-wrapper12 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+.ml712 .letter12 {
+  transform-origin: 0 100%;
+  display: inline-block;
+  line-height: 1em;
+}
+
+.ml713 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.7em;
+}
+.ml713 .text-wrapper13 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+.ml713 .letter13 {
+  transform-origin: 0 100%;
+  display: inline-block;
+  line-height: 1em;
+}
+
+.ml714 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.7em;
+}
+.ml714 .text-wrapper14 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+.ml714 .letter14 {
+  transform-origin: 0 100%;
+  display: inline-block;
+  line-height: 1em;
+}
+
+.ml715 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.7em;
+}
+.ml715 .text-wrapper15 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+.ml715 .letter15 {
+  transform-origin: 0 100%;
+  display: inline-block;
+  line-height: 1em;
+}
+
+.ml716 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.7em;
+}
+.ml716 .text-wrapper16 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+.ml716 .letter16 {
+  transform-origin: 0 100%;
+  display: inline-block;
+  line-height: 1em;
+}
+
+.ml717 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.7em;
+}
+.ml717 .text-wrapper17 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+.ml717 .letter17 {
+  transform-origin: 0 100%;
+  display: inline-block;
+  line-height: 1em;
+}
+
+.ml718 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.7em;
+}
+.ml718 .text-wrapper18 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+.ml718 .letter18 {
+  transform-origin: 0 100%;
+  display: inline-block;
+  line-height: 1em;
+}
+
+.ml719 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.7em;
+}
+.ml719 .text-wrapper19 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+.ml719 .letter19 {
+  transform-origin: 0 100%;
+  display: inline-block;
+  line-height: 1em;
+}
+
+.ml720 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.7em;
+}
+.ml720 .text-wrapper20 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+.ml720 .letter20 {
+  transform-origin: 0 100%;
+  display: inline-block;
+  line-height: 1em;
+}
+
+.ml721 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.7em;
+}
+.ml721 .text-wrapper21 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+.ml721 .letter21 {
+  transform-origin: 0 100%;
+  display: inline-block;
+  line-height: 1em;
+}
+.ml15 {
+  font-weight: 800;
+  font-size: 3.8em;
+  text-transform: uppercase;
+  letter-spacing: 0.5em;
+}
+
+.ml15 .word {
+
+  display: inline-block;
+  line-height: 1em;
+}
+
+.ml2 {
+  font-weight: bold;
+  font-size: 35pt;
+}
+
+.ml2 .letter {
+  display: inline-block;
+  line-height: 1em;
+  font-size: 35pt;
+}
+
+.option {
+    margin: 0 auto;
+    border-radius: 10px;
+    /*background-color: rgb(233, 233, 233);*/
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    -webkit-transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+}
+
+.option:hover {
+    -webkit-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+/*Elements to the left*/
+#left{
+  margin-top: 110px;
+  float:left;
+  width:150px;
+}
+
+/*Elements to the right*/
+#right{
+  margin-top: 110px;
+  float:right;
+  width:270px;
+}
+
+/*Styling of each leaf*/
+#boxA #boxB #boxC #boxD #boxE #boxF #boxG #boxH #boxI #boxJ #boxK #boxL #boxM #boxN #boxO #boxP #boxQ #boxR #boxS #boxT #boxU{
+  float:left;padding:10px;margin:10px;-moz-user-select:none;
+  }
+  #boxA{ background-color: none; width:150px; height:120px;  }
+  #boxB{ background-color: none; width:150px; height:120px;  }
+  #boxC{ background-color: none; width:150px; height:120px;  }
+  #boxD{ background-color: none; width:270px; height:150px;  }
+  #boxE{ background-color: none; width:270px; height:150px;  }
+  #boxF{ background-color: none; width:270px; height:150px;  }
+  #boxG{ background-color: none; width:270px; height:150px;  }
+  #boxH{ background-color: none; width:270px; height:150px;  }
+  #boxI{ background-color: none; width:270px; height:150px;  }
+  #boxJ{ background-color: none; width:270px; height:150px;  }
+  #boxK{ background-color: none; width:150px; height:120px;  }
+  #boxL{ background-color: none; width:350px; height:150px;  }
+  #boxM{ background-color: none; width:150px; height:120px;  }
+  #boxN{ background-color: none; width:270px; height:150px;  }
+  #boxO{ background-color: none; width:150px; height:120px;  }
+  #boxP{ background-color: none; width:270px; height:150px;  }
+  #boxQ{ background-color: none; width:270px; height:150px;  }
+  #boxR{ background-color: none; width:150px; height:120px;  }
+  #boxS{ background-color: none; width:150px; height:120px;  }
+  #boxT{ background-color: none; width:270px; height:150px;  }
+  #boxU{ background-color: none; width:270px; height:150px;  }
+
+/********************/
+
+#particles-js canvas {
+    display: block;
+    /* vertical-align: bottom; */
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+    -webkit-transition: opacity .8s ease, -webkit-transform 1.4s ease;
+    transition: opacity .8s ease, transform 1.4s ease
+}
+
+#particles-js
+{
+  height: 750%;
+  width: 100%;
+  background: #FFF5FD;
+  opacity: 0.7;
+  position: absolute;
+  z-index: -1;
+}
+
+nav {
+    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.score-box {
+    text-align: right;
+    font-family: 'Cabin Sketch';
+    font-weight: bolder;
+    font-size: 40px;
+    letter-spacing: 0.5rem;
+    padding-top: 2rem;
+}
+
+/*Clock*/
+#clockdiv {
+    vertical-align: middle;
+    margin-left: 25px;
+    font-family: sans-serif;
+    color: #fff;
+    display: inline-block;
+    font-weight: 100;
+    text-align: center;
+    font-size: 30px;
+}
+
+#clockdiv>div {
+    padding: 10px;
+    border-radius: 3px;
+    background: #000;
+    display: inline-block;
+}
+
+#clockdiv div>span {
+    padding: 15px;
+    border-radius: 3px;
+    background: #000;
+    display: inline-block;
+}
+
+.smalltext {
+    padding-top: 5px;
+    font-size: 16px;
+}
+/***************/
+
+</style>
+</head>
+<body>
+
+  <nav class="navbar navbar-light bg-light fixed-top">
+    <div class="row" style="width:100%">
+        <div class="col-md-6">
+            <div id="clockdiv">
+                <div>
+                    <span class="minutes"></span>
+                    <div class="smalltext">Minutes</div>
+                </div>
+                <div>
+                    <span class="seconds"></span>
+                    <div class="smalltext">Seconds</div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="col-md-4 text-center"> -->
+                <!-- <img src="{{asset('imgs/gratitude/word-scramble.png')}}" alt="App Logo" style="height: 10rem;"> -->
+        <!-- </div>  -->
+        <div class="col-md-6">
+            <div class="score-box" id="scoring">
+                Your Score is 0
+            </div>
+        </div>
+    </div>
+    
+</nav>
+
+<!--Particle JS in the background-->
+  <div id="particles-js"></div>
+  <script type="text/javascript" src="particles.js"></script>
+  <script type="text/javascript" src="app.js"></script>
+<!------------>
+  
+  <audio src="Fast-clock-ticking-sound-effect.mp3" id="my_audio" loop="loop"></audio>
+  <audio src="Train Horn Low-SoundBible.com-1744689113.mp3" id="my_end"></audio>
+  <audio src="coindrop.mp3" id="drop" loop="loop"></audio>
+
+    <h3 id="scoring" style="position: fixed; margin-left: 180px ; font-size: 16pt ; font-family: Cabin Sketch;"></h3>
+
+  <div id="left">
+    <div id="boxA" style="font-size: 13.5pt ; font-family: Nunito;">
+      <img src="leaf.png" draggable = "false" width="150px" height="100px">
+      <p><h6 style="text-align: left; margin-top: -70px; margin-left: 50px; color: white; font-size: 10px;">S <input type="text" name="text" id="s1" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> N</h6></p>
+    </div>
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" id="bs1" class="button12 button2 option" name="name" value="Submit" onclick="check1()">
+    <p id="img1" style="text-align: center;"></p>
+    <input type="image" class="button button1 option" name="button" id="sun1" value="Hint" style="width: 80px ; height: 50px;" src="https://cdn1.iconfinder.com/data/icons/design-6/24/Idea-512.png" onclick="displaysun()">
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" id="show1" class="button12 button2 option" name="name" value="Show Answer" onclick="ans1()">
+    <h1 class="ml71">
+        <span class="text-wrapper1">
+        <span class="letters1" id="greet1" style="color: green; font-family: Nunito;"></span>
+        </span>
+      </h1>
+
+    <div id="boxB" style="font-size: 13.5pt ; font-family: Nunito;">
+      <img src="leaf.png" draggable = "false" width="200px" height="130px">
+      <p><h6 style="text-align: left; margin-left: 41.5px; margin-top: -85px ; color: white; font-size: 10px;">N <input type="text" name="text" id="n1" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> T <input type="text" name="text" id="n2" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> R <input type="text" name="text" id="n3" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"></h6></p>
+    </div>
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" class="button12 button2 option" id="ns1" name="name" value="Submit" onclick="check2()">
+    <p id="img2" style="text-align: center;"></p>
+    <input type="image" class="button button1 option" name="button" id="nature1" value="Hint" style="width: 80px ; height: 50px;" src="https://cdn1.iconfinder.com/data/icons/design-6/24/Idea-512.png" onclick="displaynature()">
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" id="show2" class="button12 button2 option" name="name" value="Show Answer" onclick="ans2()">
+    <h1 class="ml72">
+          <span class="text-wrapper2">
+          <span class="letters2" id="greet2" style="color: green; font-family: Nunito;"></span>
+          </span>
+        </h1>
+
+    <div id="boxC" style="font-size: 13.5pt ; font-family: Nunito;">
+      <img src="leaf.png" draggable = "false" width="150px" height="100px">
+      <p><h6 style="text-align: center; margin-left: 10px; margin-top: -70px ; color: white; font-size: 10px;">G <input type="text" name="text" id="g1" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> D</h6></p>
+    </div>
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" class="button12 button2 option" id="gs1" name="name" value="Submit" onclick="check3()">
+    <p id="img3" style="text-align: center;"></p>
+    <input type="image" class="button button1 option" name="button" id="god1" value="Hint" style="width: 80px ; height: 50px;" src="https://cdn1.iconfinder.com/data/icons/design-6/24/Idea-512.png" onclick="displaygod()">
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" id="show3" class="button12 button2 option" name="name" value="Show Answer" onclick="ans3()">
+    <h1 class="ml73">
+          <span class="text-wrapper3">
+          <span class="letters3" id="greet3" style="color: green; font-family: Nunito;"></span>
+          </span>
+        </h1>
+
+    <div id="boxD" style="font-size: 13.5pt ; font-family: Nunito;">
+      <img src="leaf.png" draggable = "false" width="240px" height="150px">
+      <p><h6 style="text-align: center; margin-left: -45px; margin-top: -100px ; color: white; font-size: 10px;"><input type="text" name="text" id="p1" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> A <input type="text" name="text" id="p2" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> E <input type="text" name="text" id="p3" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> T <input type="text" name="text" id="p4" style="width: 25px ; text-align: center; color: black" maxlength="1"></h6></p>
+    </div>
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" class="button12 button2 option" id="ps1" name="name" value="Submit" onclick="check4()">
+    <p id="img4" style="text-align: center;"></p>
+    <input type="image" class="button button1 option" name="button" id="parents1" value="Hint" style="width: 80px ; height: 50px;" src="https://cdn1.iconfinder.com/data/icons/design-6/24/Idea-512.png" onclick="displayparents()">
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" id="show4" class="button12 button2 option" name="name" value="Show Answer" onclick="ans4()">
+          <h1 class="ml74">
+          <span class="text-wrapper4">
+          <span class="letters4" id="greet4" style="color: green; font-family: Nunito;"></span>
+          </span>
+        </h1>
+
+      <div id="boxE" style="font-size: 13.5pt ; font-family: Nunito;">
+      <img src="leaf.png" draggable = "false" width="240px" height="150px">
+      <p><h6 style="text-align: center; margin-left: -45px; margin-top: -100px ; color: white; font-size: 10px;">S <input type="text" name="text" id="sc1" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> H <input type="text" name="text" id="sc2" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> O <input type="text" name="text" id="sc3" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"></h6></p>
+    </div>
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" class="button12 button2 option" id="scs1" name="name" value="Submit" onclick="check5()">
+    <p id="img5" style="text-align: center;"></p>
+    <input type="image" class="button button1 option" name="button" id="school1" value="Hint" style="width: 80px ; height: 50px;" src="https://cdn1.iconfinder.com/data/icons/design-6/24/Idea-512.png" onclick="displayschool()">
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" id="show5" class="button12 button2 option" name="name" value="Show Answer" onclick="ans5()">
+
+          <h1 class="ml75">
+          <span class="text-wrapper5">
+          <span class="letters5" id="greet5" style="color: green; font-family: Nunito;"></span>
+          </span>
+        </h1>
+
+    
+
+    <div id="boxG" style="font-size: 13.5pt ; font-family: Nunito;">
+      <img src="leaf.png" draggable = "false" width="240px" height="150px">
+      <p><h6 style="text-align: center;  margin-left: -45px; margin-top: -100px ; color: white; font-size: 10px;">S I <input type="text" name="text" id="si1" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> L <input type="text" name="text" id="si2" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> N G <input type="text" name="text" id="si3" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"></h6></p>
+    </div>
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" class="button12 button2 option" id="sis1" name="name" value="Submit" onclick="check7()">
+    <p id="img7" style="text-align: center;"></p>
+    <input type="image" class="button button1 option" name="button" id="siblings1" value="Hint" style="width: 80px ; height: 55px;" src="https://cdn1.iconfinder.com/data/icons/design-6/24/Idea-512.png" onclick="displaysiblings()">
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" id="show7" class="button12 button2 option" name="name" value="Show Answer" onclick="ans7()">
+          <h1 class="ml77">
+          <span class="text-wrapper7">
+          <span class="letters7" id="greet7" style="color: green; font-family: Nunito;"></span>
+          </span>
+        </h1>
+
+
+    <div id="boxJ" style="font-size: 13.5pt ; font-family: Nunito;">
+      <img src="leaf.png" draggable = "false" width="260px" height="150px">
+      <p><h6 style="text-align: center;  margin-left: -25px; margin-top: -100px ; color: white; font-size: 10px;">T <input type="text" name="text" id="te1" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> C H <input type="text" name="text" id="te2" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> O L <input type="text" name="text" id="te3" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> G Y</h6></p>
+    </div>
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" class="button12 button2 option" id="tes1" name="name" value="Submit" onclick="check10()">
+    <p id="img10" style="text-align: center;"></p>
+    <input type="image" class="button button1 option" name="button" id="technology1" value="Hint" style="width: 80px ; height: 55px;" src="https://cdn1.iconfinder.com/data/icons/design-6/24/Idea-512.png" onclick="displaytechnology()">
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" id="show10" class="button12 button2 option" name="name" value="Show Answer" onclick="ans10()">
+          <h1 class="ml710">
+          <span class="text-wrapper10">
+          <span class="letters10" id="greet10" style="color: green; font-family: Nunito;"></span>
+          </span>
+        </h1>
+
+    <div id="boxK" style="font-size: 13.5pt ; font-family: Nunito;">
+      <img src="leaf.png" draggable = "false" width="150px" height="100px">
+      <p><h6 style="text-align: center; margin-left: -10px; margin-top: -75px ; color: white; font-size: 10px;">G I <input type="text" name="text" id="gi1" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> T <input type="text" name="text" id="gi2" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"></h6></p>
+    </div>
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" class="button12 button2 option" id="gis1" name="name" value="Submit" onclick="check11()">
+    <p id="img11" style="text-align: center;"></p>
+    <input type="image" class="button button1 option" name="button" id="gifts1" value="Hint" style="width: 80px ; height: 55px;" src="https://cdn1.iconfinder.com/data/icons/design-6/24/Idea-512.png" onclick="displaygifts()">
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" id="show11" class="button12 button2 option" name="name" value="Show Answer" onclick="ans11()">
+          <h1 class="ml711">
+          <span class="text-wrapper11">
+          <span class="letters11" id="greet11" style="color: green; font-family: Nunito;"></span>
+          </span>
+        </h1>
+
+    <div id="boxL" style="font-size: 13.5pt ; font-family: Nunito;">
+      <img src="leaf.png" draggable = "false" width="400px" height="180px">
+      <p><h6 style="text-align: center; margin-left: 35px; margin-top: -110px ; color: white; font-size: 10px;"><input type="text" name="text" id="tr1" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> R <input type="text" name="text" id="tr2" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> N <input type="text" name="text" id="tr3" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> P <input type="text" name="text" id="tr4" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> R T A<input type="text" name="text" id="tr5" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> I O <input type="text" name="text" id="tr6" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"></h6></p>
+    </div>
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" class="button12 button2 option" id="trs1" name="name" value="Submit" onclick="check12()">
+    <p id="img12" style="text-align: center;"></p>
+    <input type="image" class="button button1 option" name="button" id="transportation1" value="Hint" style="width: 80px ; height: 55px;" src="https://cdn1.iconfinder.com/data/icons/design-6/24/Idea-512.png" onclick="displaytransportation()">
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" id="show12" class="button12 button2 option" name="name" value="Show Answer" onclick="ans12()">
+          <h1 class="ml712">
+          <span class="text-wrapper12">
+          <span class="letters12" id="greet12" style="color: green; font-family: Nunito;"></span>
+          </span>
+        </h1>
+
+    <div id="boxO" style="font-size: 13.5pt ; font-family: Nunito;">
+      <img src="leafflip.png" draggable = "false" width="150px" height="100px">
+      <p><h6 style="text-align: center; margin-left: 20px; margin-top: -80px ; color: white; font-size: 10px;"><input type="text" name="text" id="h1" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> O <input type="text" name="text" id="h2" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> E</h6></p>
+    </div>
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" class="button12 button2 option" id="hs1" name="name" value="Submit" onclick="check15()">
+    <p id="img15" style="text-align: center;"></p>
+    <input type="image" class="button button1 option" name="button" id="home1" value="Hint" style="width: 80px ; height: 55px;" src="https://cdn1.iconfinder.com/data/icons/design-6/24/Idea-512.png" onclick="displayhome()">
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" id="show15" class="button12 button2 option" name="name" value="Show Answer" onclick="ans15()">
+          <h1 class="ml715">
+          <span class="text-wrapper15">
+          <span class="letters15" id="greet15" style="color: green; font-family: Nunito;"></span>
+          </span>
+        </h1>
+
+
+    <div id="boxS" style="font-size: 13.5pt ; font-family: Nunito;">
+      <img src="leafflip.png" draggable = "false" width="150px" height="100px">
+      <p><h6 style="text-align: center; margin-left: 15px; margin-top: -80px ; color: white; font-size: 10px;">S <input type="text" name="text" id="st1" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> A <input type="text" name="text" id="st2" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> S</h6></p>
+    </div>
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" class="button12 button2 option" id="sts1" name="name" value="Submit" onclick="check19()">
+    <p id="img19" style="text-align: center;"></p>
+    <input type="image" class="button button1 option" name="button" id="stars1" value="Hint" style="width: 80px ; height: 55px;" src="https://cdn1.iconfinder.com/data/icons/design-6/24/Idea-512.png" onclick="displaystars()">
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" id="show19" class="button12 button2 option" name="name" value="Show Answer" onclick="ans19()">
+          <h1 class="ml719">
+          <span class="text-wrapper19">
+          <span class="letters19" id="greet19" style="color: green; font-family: Nunito;"></span>
+          </span>
+        </h1>
+
+    <div id="boxM" style="font-size: 13.5pt ; font-family: Nunito;">
+      <img src="leafflip.png" draggable = "false" width="150px" height="100px">
+      <p><h6 style="text-align: center; margin-left: 20px; margin-top: -80px ; color: white; font-size: 10px;"><input type="text" name="text" id="fo1" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> O <input type="text" name="text" id="fo2" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> D</h6></p>
+    </div>
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" class="button12 button2 option" id="fos1" name="name" value="Submit" onclick="check13()">
+    <p id="img13" style="text-align: center;"></p>
+    <input type="image" class="button button1 option" name="button" id="food1" value="Hint" style="width: 80px ; height: 55px;" src="https://cdn1.iconfinder.com/data/icons/design-6/24/Idea-512.png" onclick="displayfood()">
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" id="show13" class="button12 button2 option" name="name" value="Show Answer" onclick="ans13()">
+          <h1 class="ml713">
+          <span class="text-wrapper13">
+          <span class="letters13" id="greet13" style="color: green; font-family: Nunito;"></span>
+          </span>
+        </h1>
+
+    
+  </div>
+
+  <div id="right">
+    
+    <div id="boxN" style="font-size: 13.5pt ; font-family: Nunito;">
+      <img src="leafflip.png" draggable = "false" width="260px" height="150px">
+      <p><h6 style="text-align: center;  margin-left: -10px; margin-top: -100px ; color: white; font-size: 10px;">C L <input type="text" name="text" id="c1" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> T <input type="text" name="text" id="c2" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> E <input type="text" name="text" id="c3" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"></h6></p>
+    </div>
+    <div align="right">
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" align="middle" class="button12 button2 option" id="cs1" name="name" value="Submit" onclick="check14()">
+    <p id="img14" style="text-align: center;"></p>
+    <input type="image" class="button button1 option" name="button" id="clothes1" value="Hint" style="width: 80px ; height: 55px;" src="https://cdn1.iconfinder.com/data/icons/design-6/24/Idea-512.png" onclick="displayclothes()"><br>
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" id="show14" class="button12 button2 option" name="name" value="Show Answer" onclick="ans14()">
+    <h1 class="ml714">
+          <span class="text-wrapper14">
+          <span class="letters14" id="greet14" style="color: green; font-family: Nunito;"></span>
+          </span>
+        </h1>
+        </div>
+
+        <div id="boxH" style="font-size: 13.5pt ; font-family: Nunito;">
+      <img src="leaf.png" draggable = "false" width="240px" height="150px">
+      <p><h6 style="text-align: center; margin-left: -45px; margin-top: -100px ; color: white; font-size: 10px;">F R <input type="text" name="text" id="f1" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> E <input type="text" name="text" id="f2" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> D <input type="text" name="text" id="f3" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"></h6></p>
+    </div>
+    <div align="right">
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" class="button12 button2 option" id="fs1" name="name" value="Submit" onclick="check8()">
+    <p id="img8" style="text-align: center;"></p>
+    <input type="image" class="button button1 option" name="button" id="friends1" value="Hint" style="width: 80px ; height: 55px;" src="https://cdn1.iconfinder.com/data/icons/design-6/24/Idea-512.png" onclick="displayfriends()"><br>
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" id="show8" class="button12 button2 option" name="name" value="Show Answer" onclick="ans8()">
+          <h1 class="ml78">
+          <span class="text-wrapper8">
+          <span class="letters8" id="greet8" style="color: green; font-family: Nunito;"></span>
+          </span>
+        </h1>
+        </div>
+
+
+    <div id="boxP" style="font-size: 13.5pt ; font-family: Nunito;">
+      <img src="leafflip.png" draggable = "false" width="260px" height="150px">
+      <p><h6 style="text-align: center; margin-left: -10px; margin-top: -95px ; color: white; font-size: 10px;"><input type="text" name="text" id="w1" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> A <input type="text" name="text" id="w2" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> E <input type="text" name="text" id="w3" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"></h6></p>
+    </div>
+    <div align="right">
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" class="button12 button2 option" id="ws1" name="name" value="Submit" onclick="check16()">
+    <p id="img16" style="text-align: center;"></p>
+    <input type="image" class="button button1 option" name="button" id="water1" value="Hint" style="width: 80px ; height: 55px;" src="https://cdn1.iconfinder.com/data/icons/design-6/24/Idea-512.png" onclick="displaywater()"><br>
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" id="show16" class="button12 button2 option" name="name" value="Show Answer" onclick="ans16()">
+          <h1 class="ml716">
+          <span class="text-wrapper16">
+          <span class="letters16" id="greet16" style="color: green; font-family: Nunito;"></span>
+          </span>
+        </h1>
+        </div>
+
+    <div id="boxQ" style="font-size: 13.5pt ; font-family: Nunito;">
+      <img src="leafflip.png" draggable = "false" width="260px" height="150px">
+      <p><h6 style="text-align: center; margin-left: -10px; margin-top: -95px ; color: white; font-size: 10px;">S <input type="text" name="text" id="sci1" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> I <input type="text" name="text" id="sci2" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> N <input type="text" name="text" id="sci3" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> E</h6></p>
+    </div>
+    <div align="right">
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" class="button12 button2 option" id="scis1" name="name" value="Submit" onclick="check17()">
+    <p id="img17" style="text-align: center;"></p>
+    <input type="image" class="button button1 option" name="button" id="science1" value="Hint" style="width: 80px ; height: 55px;" src="https://cdn1.iconfinder.com/data/icons/design-6/24/Idea-512.png" onclick="displayscience()"><br>
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" id="show17" class="button12 button2 option" name="name" value="Show Answer" onclick="ans17()">
+          <h1 class="ml717">
+          <span class="text-wrapper17">
+          <span class="letters17" id="greet17" style="color: green; font-family: Nunito;"></span>
+          </span>
+        </h1>
+        </div>
+
+    <div id="boxU" style="font-size: 13.5pt ; font-family: Nunito;">
+      <img src="leafflip.png" draggable = "false" width="260px" height="150px">
+      <p><h6 style="text-align: center; margin-left: -10px; margin-top: -88px; color: white; font-size: 10px;">C <input type="text" name="text" id="cl1" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> E A <input type="text" name="text" id="cl2" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> E R <input type="text" name="text" id="cl3" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"></h6></p>
+    </div>
+    <div align="right">
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" class="button12 button2 option" id="cls1" name="name" value="Submit" onclick="check21()">
+    <p id="img21" style="text-align: center;"></p>
+    <input type="image" class="button button1 option" name="button" id="cleaners1" value="Hint" style="width: 80px ; height: 55px;" src="https://cdn1.iconfinder.com/data/icons/design-6/24/Idea-512.png" onclick="displaycleaners()"><br>
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" id="show21" class="button12 button2 option" name="name" value="Show Answer" onclick="ans21()">
+          <h1 class="ml721">
+          <span class="text-wrapper21">
+          <span class="letters21" id="greet21" style="color: green; font-family: Nunito;"></span>
+          </span>
+        </h1>
+        </div>
+
+    <div id="boxF" style="font-size: 13.5pt ; font-family: Nunito;">
+      <img src="leaf.png" draggable = "false" width="240px" height="150px">
+      <p><h6 style="text-align: center; margin-left: -45px; margin-top: -100px; color: white; font-size: 10px;">T <input type="text" name="text" id="t1" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> A <input type="text" name="text" id="t2" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> H <input type="text" name="text" id="t3" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> R S</h6></p>
+    </div>
+    <div align="right">
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" class="button12 button2 option" id="ts1" name="name" value="Submit" onclick="check6()">
+    <p id="img6" style="text-align: center;"></p>
+    <input type="image" class="button button1 option" name="button" id="teachers1" value="Hint" style="width: 80px ; height: 50px;" src="https://cdn1.iconfinder.com/data/icons/design-6/24/Idea-512.png" onclick="displayteachers()"><br>
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" id="show6" class="button12 button2 option" name="name" value="Show Answer" onclick="ans6()">
+          <h1 class="ml76">
+          <span class="text-wrapper6">
+          <span class="letters6" id="greet6" style="color: green; font-family: Nunito;"></span>
+          </span>
+        </h1>
+        </div>
+
+     <div id="boxI" style="font-size: 13.5pt ; font-family: Nunito;">
+      <img src="leaf.png" draggable = "false" width="240px" height="150px">
+      <p><h6 style="text-align: center; margin-left: -45px; margin-top: -100px ; color: white; font-size: 10px;">F <input type="text" name="text" id="fa1" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> M <input type="text" name="text" id="fa2" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> L <input type="text" name="text" id="fa3" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"></h6></p>
+    </div>
+    <div align="right">
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" class="button12 button2 option" id="fas1" name="name" value="Submit" onclick="check9()">
+    <p id="img9" style="text-align: center;"></p>
+    <input type="image" class="button button1 option" name="button" id="family1" value="Hint" style="width: 80px ; height: 55px;" src="https://cdn1.iconfinder.com/data/icons/design-6/24/Idea-512.png" onclick="displayfamily()"><br>
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" id="show9" class="button12 button2 option" name="name" value="Show Answer" onclick="ans9()">
+          <h1 class="ml79">
+          <span class="text-wrapper9">
+          <span class="letters9" id="greet9" style="color: green; font-family: Nunito;"></span>
+          </span>
+        </h1>
+        </div>
+
+    <div id="boxR" style="font-size: 13.5pt ; font-family: Nunito;">
+      <img src="leafflip.png" draggable = "false" width="150px" height="100px">
+      <p><h6 style="text-align: center; margin-left: 20px; margin-top: -80px ; color: white; font-size: 10px;">R <input type="text" name="text" id="r1" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> I <input type="text" name="text" id="r2" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"></h6></p>
+    </div>
+    <div align="right">
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" class="button12 button2 option" id="rs1" name="name" value="Submit" onclick="check18()">
+    <p id="img18" style="text-align: center;"></p>
+    <input type="image" class="button button1 option" name="button" id="rain1" value="Hint" style="width: 80px ; height: 55px;" src="https://cdn1.iconfinder.com/data/icons/design-6/24/Idea-512.png" onclick="displayrain()"><br>
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" id="show18" class="button12 button2 option" name="name" value="Show Answer" onclick="ans18()">
+          <h1 class="ml718">
+          <span class="text-wrapper18">
+          <span class="letters18" id="greet18" style="color: green; font-family: Nunito;"></span>
+          </span>
+        </h1>
+        </div>
+
+    <div id="boxT" style="font-size: 13.5pt ; font-family: Nunito;">
+      <img src="leafflip.png" draggable = "false" width="260px" height="150px">
+      <p><h6 style="text-align: center; margin-left: -10px; margin-top: -85px ; color: white; font-size: 10px;">H <input type="text" name="text" id="ho1" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> L <input type="text" name="text" id="ho2" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> D <input type="text" name="text" id="ho3" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"> Y <input type="text" name="text" id="ho4" style="width: 25px ; text-align: center; color: black; padding: 0px" maxlength="1"></h6></p>
+    </div>
+    <div align="right">
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" class="button12 button2 option" id="hos1" name="name" value="Submit" onclick="check20()">
+    <p id="img20" style="text-align: center;"></p>
+    <input type="image" class="button button1 option" name="button" id="holidays1" value="Hint" style="width: 80px ; height: 55px;" src="https://cdn1.iconfinder.com/data/icons/design-6/24/Idea-512.png" onclick="displayholidays()"><br>
+    <input type="button" style="font-size: 13.5pt ; font-family: Nunito;" id="show20" class="button12 button2 option" name="name" value="Show Answer" onclick="ans20()">
+          <h1 class="ml720">
+          <span class="text-wrapper20">
+          <span class="letters20" id="greet20" style="color: green; font-family: Nunito;"></span>
+          </span>
+        </h1>
+        </div>
+
+  </div>
+
+<!-- Final greeting messages and images-->
+  <div style="top: 100px; position: relative;">
+  <center><img src="coins.gif" id="coins" hidden="true" width="200px" height="200px"></center>
+  <center><h1 id="totscore" style="font-family: Cabin Sketch; font-weight: bold; color: #FF54FA; font-size: 22pt"></h1></center>
+  <center><h1 id="totcoins" style="font-family: Cabin Sketch; font-weight: bold; color: #FF54FA; font-size: 22pt"></h1></center>
+  
+  <h1 class="ml2" id="congrats" style="text-align: center; font-family: Cabin Sketch;"></h1>
+  <!--<div class="container" align="left">-->
+    <center>
+    <img src="party1.gif" id="part1" hidden="true" width="300px" height="400px" style="margin-top: 100px;">
+    <img src="good job.gif" id="goodjob" hidden="true" width="300px" height="400px" style="margin-top: 100px;">
+    <img src="party1.gif" id="part2" hidden="true" width="300px" height="400px" style="margin-top: 100px;"></center>
+  <!--</div>-->
+ </div>
+ <!------------->
+ 
+  <div class="d-flex justify-content-center bg-secondary mb-3" id="treeleaf">
+    <img src="tree transparent.png" width="800px" height="800px" style="position: fixed; margin-top: 100px;">
+    <div class="leaf1" ondragenter="return dragEnter(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)"></div>
+    <div class="leaf2" ondragenter="return dragEnter(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)"></div>
+    <div class="leaf3" ondragenter="return dragEnter(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)"></div>
+    <div class="leaf4" ondragenter="return dragEnter(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)"></div>
+    <div class="leaf5" ondragenter="return dragEnter(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)"></div>
+  </div>
+</body>
+</html>
