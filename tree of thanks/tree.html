@@ -15,7 +15,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
         integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous">
     </script>
-
+  
 <!-- Timer Part-->
 <script>
     function getTimeRemaining(endtime) {
@@ -1186,6 +1186,23 @@
       }
   }
 
+//Get Results button function
+  function submit()
+  {
+    document.getElementById("treeleaf").innerHTML = "";
+    document.getElementById("left").innerHTML = "";
+    document.getElementById("right").innerHTML = "";
+      
+    document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+    document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+    document.getElementById("coins").hidden = false;
+    document.getElementById("my_audio").pause();
+    setTimeout(function(){ 
+    document.getElementById("drop").play(); 
+    }, 1000)
+  }
+
+
 //Displaying the corresponding images when hint button is pressed
   function displaysun()
   {
@@ -2184,8 +2201,6 @@ nav {
           <span class="letters13" id="greet13" style="color: green; font-family: Nunito;"></span>
           </span>
         </h1>
-
-    
   </div>
 
   <div id="right">
@@ -2333,8 +2348,8 @@ nav {
           <span class="letters20" id="greet20" style="color: green; font-family: Nunito;"></span>
           </span>
         </h1>
+        <input class="option" style="background-color: #0091ff; border-color: 1px solid #0091ff; padding: 5px 6px;" type="button" name="submit" id="s1" value="Get Results" onclick="submit()">
         </div>
-
   </div>
 
 <!-- Final greeting messages and images-->
@@ -2361,5 +2376,6 @@ nav {
     <div class="leaf4" ondragenter="return dragEnter(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)"></div>
     <div class="leaf5" ondragenter="return dragEnter(event)" ondrop="return dragDrop(event)" ondragover="return dragOver(event)"></div>
   </div>
+
 </body>
 </html>
