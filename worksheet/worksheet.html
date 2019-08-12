@@ -549,6 +549,56 @@ nav {
             box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
     </style>
+
+    <script type="text/javascript">
+      function endtest()
+      {
+        document.getElementById("b1").disabled = true;
+        document.getElementById("a1").disabled = true;
+            
+            document.getElementById("b2").disabled = true;
+        document.getElementById("a2").disabled = true;
+            
+            document.getElementById("b3").disabled = true;
+        document.getElementById("a3").disabled = true;
+            
+            document.getElementById("b4").disabled = true;
+        document.getElementById("a4").disabled = true;
+            
+            document.getElementById("b5").disabled = true;
+        document.getElementById("a5").disabled = true;
+            
+            document.getElementById("b6").disabled = true;
+        document.getElementById("a6").disabled = true;
+            
+            document.getElementById("b7").disabled = true;
+        document.getElementById("a7").disabled = true;
+            
+            document.getElementById("b8").disabled = true;
+        document.getElementById("a8").disabled = true;
+        document.getElementById("a9").disabled = true;
+            
+            
+        document.getElementById("tf1").disabled = true;
+            
+            
+        document.getElementById("tf2").disabled = true;
+            
+            
+        document.getElementById("tf3").disabled = true;
+            
+            
+        document.getElementById("tf4").disabled = true;
+            
+            
+        document.getElementById("tf5").disabled = true;
+        document.getElementById("s1").disabled = true;
+            document.getElementById("totscore").innerHTML = "Total correct answer " + score;
+            document.getElementById("totcoins").innerHTML = "Total coins achieved " + score;
+            document.getElementById("coins").hidden = false;
+      }
+    </script>
+
     <script type="text/javascript">
     	var score = 0;
 
@@ -1169,5 +1219,6 @@ nav {
     <input style="font-size: 13.5pt ; font-family: Nunito;" type="button" name="submit" value="Submit" id="s1" onclick="submit()" class="btn btn-dark m-auto d-block">
       </div>
 	</div>
+  <input type="button" name="endtest" id="end1" value="End Test" onclick="endtest()" class="btn btn-dark m-auto d-block">
 </body>
 </html>
